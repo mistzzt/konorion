@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Konorion.Script
 {
-	class GenericConfiguration
-	{
-	}
+    class GenericConfiguration
+    {
+    }
 }
