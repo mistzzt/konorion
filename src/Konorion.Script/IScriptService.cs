@@ -4,6 +4,8 @@ namespace Konorion.Script
 {
 	public interface IScriptService : ISharedService
 	{
-		void Execute(string code);
+		object Execute(string code);
+
+		void DefineVariable(string identifier, object instance);
 	}
 }
