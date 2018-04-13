@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konorion.Plugin", "Konorion.Plugin\Konorion.Plugin.csproj", "{6F7F103E-19C5-4ABB-AA7E-FFE1B6C28588}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konorion.Script", "Konorion.Script\Konorion.Script.csproj", "{79E051E4-4D8D-483A-B0B8-9FB5FD7F2B99}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F7F103E-19C5-4ABB-AA7E-FFE1B6C28588}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F7F103E-19C5-4ABB-AA7E-FFE1B6C28588}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F7F103E-19C5-4ABB-AA7E-FFE1B6C28588}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F7F103E-19C5-4ABB-AA7E-FFE1B6C28588}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79E051E4-4D8D-483A-B0B8-9FB5FD7F2B99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79E051E4-4D8D-483A-B0B8-9FB5FD7F2B99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79E051E4-4D8D-483A-B0B8-9FB5FD7F2B99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79E051E4-4D8D-483A-B0B8-9FB5FD7F2B99}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9340FBD9-B63F-4A6D-AC1B-29D15A67DB32}
+	EndGlobalSection
+EndGlobal

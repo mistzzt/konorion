@@ -1,0 +1,3698 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Orion</name>
+    </assembly>
+    <members>
+        <member name="T:Orion.Authorization.IGroupService">
+            <summary>
+            Groups link lists of accounts together which has a common set of permissions and properties
+            set against them.
+            </summary>
+        </member>
+        <member name="P:Orion.Authorization.IGroupService.AdministratorGroup">
+            <summary>
+            Gets the built-in administrator group.  That is, the group which members have access to everything.
+            </summary>
+        </member>
+        <member name="P:Orion.Authorization.IGroupService.AnonymousGroup">
+            <summary>
+            Gets the built-in anonymous group which all unauthenticated players are placed into.
+            </summary>
+        </member>
+        <member name="M:Orion.Authorization.IGroupService.FindGroups(System.Predicate{Orion.Authorization.IGroup})">
+            <summary>
+            Finds a list of groups, optionally filtered by the supplied <paramref name="predicate"/>.
+            </summary>
+            <param name="predicate">
+            (optional) A predicate expression to filter groups by.
+            </param>
+            <returns>
+            An enumerable of all <see cref="T:Orion.Authorization.IGroup"/> instances matching the specified <paramref name="predicate"/>.
+            If no predicate expression was specified, returns all groups.
+            </returns>
+        </member>
+        <member name="M:Orion.Authorization.IGroupService.FindGroupsAsync(System.Predicate{Orion.Authorization.IGroup})">
+            <summary>
+            Asynchronously finds a list of groups, optionally filtered by the supplied <paramref name="predicate"/>.
+            </summary>
+            <param name="predicate">
+            (optional) A predicate expression to filter groups by.
+            </param>
+            <returns>
+            An enumerable of all <see cref="T:Orion.Authorization.IGroup"/> instances matching the specified <paramref name="predicate"/>.
+            If no predicate expression was specified, returns all groups.
+            </returns>
+        </member>
+        <member name="M:Orion.Authorization.IGroupService.AddGroup(System.String,System.Collections.Generic.IEnumerable{Orion.Authorization.IAccount})">
+            <summary>
+            Adds a group with the specified group name to the service, optionally with an initial list of members.
+            </summary>
+            <param name="groupName">
+            A string containing the group name to add to the service.
+            </param>
+            <param name="initialMembers">
+            (optional) A list of user accounts that will initially become members of this group.
+            </param>
+        </member>
+        <member name="M:Orion.Authorization.IGroupService.AddGroupAsync(System.String,System.Collections.Generic.IEnumerable{Orion.Authorization.IAccount})">
+            <summary>
+            Asynchronously adds a group with the specified group name to the service, optionally with an initial list of members.
+            </summary>
+            <param name="groupName">
+            A string containing the group name to add to the service.
+            </param>
+            <param name="initialMembers">
+            (optional) A list of user accounts that will initially become members of this group.
+            </param>
+        </member>
+        <member name="M:Orion.Authorization.IGroupService.DeleteGroup(Orion.Authorization.IGroup)">
+            <summary>
+            Deletes the specified <paramref name="group"/>.
+            </summary>
+            <param name="group">A reference to the group to be deleted.</param>
+        </member>
+        <member name="M:Orion.Authorization.IGroupService.DeleteGroupAsync(Orion.Authorization.IGroup)">
+            <summary>
+            Asynchronously deletes the specified <paramref name="group"/>.
+            </summary>
+            <param name="group">A reference to the group to be deleted.</param>
+        </member>
+        <member name="T:Orion.Authorization.IAccountService">
+            <summary>
+            Controls access to user accounts.
+            </summary>
+        </member>
+        <member name="M:Orion.Authorization.IAccountService.FindAccounts(System.Predicate{Orion.Authorization.IAccount})">
+            <summary>
+            Returns a list of user accounts in the system, optionally filtered by a predicate expression.
+            </summary>
+            <param name="predicate">
+            (optional) A predicate expression for filtering user accounts.
+            </param>
+            <returns>
+            An enumerable of <see cref="T:Orion.Authorization.IAccount"/> objects satisfying the supplied predicate.  If no predicate
+            is specified, an enumerable of all user accounts are returned.
+            </returns>
+        </member>
+        <member name="M:Orion.Authorization.IAccountService.FindAccountsAsync(System.Predicate{Orion.Authorization.IAccount})">
+            <summary>
+            Asynchronously returns a list of user accounts in the system, optionally filtered by a predicate
+            expression.
+            </summary>
+            <param name="predicate">
+            (optional) A predicate expression for filtering user accounts.
+            </param>
+            <returns>
+            An awaitable Task object that provides an enumerable of <see cref="T:Orion.Authorization.IAccount"/> objects satisfying
+            the supplied predicate. If no predicate is supplied, an awaitable Task object that provides an enumerable
+            of all user accounts is returned.
+            </returns>
+        </member>
+        <member name="M:Orion.Authorization.IAccountService.GetAccount(System.String)">
+            <summary>
+            Returns a user account by the specified account name, or a default value if one cannot be found.
+            </summary>
+            <param name="accountName">
+            A string containing the name of the user account to retrieve from the service.
+            </param>
+            <returns>
+            A user account object if one was found by the specified <paramref name="accountName"/>, or the compiler.
+            default if one cannot be found.
+            </returns>
+        </member>
+        <member name="M:Orion.Authorization.IAccountService.GetAccountAsync(System.String)">
+            <summary>
+            Asynchronously returns a user account by the specified account name, or a default value if one
+            cannot be found.
+            </summary>
+            <param name="accountName">
+            A string containing the name of the user account to retrieve from the service.
+            </param>
+            <returns>
+            An awaitable Task object providing a user account object if one was found by the specified
+            <paramref name="accountName"/>, or the compiler.
+            Default if one cannot be found.
+            </returns>
+        </member>
+        <member name="M:Orion.Authorization.IAccountService.AddAccount(System.String)">
+            <summary>
+            Adds an account with the specified account name to the account service in the default group.
+            </summary>
+            <param name="accountName">
+            A string referring to the user account name.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if <paramref name="accountName"/> is null or empty.
+            </exception>
+        </member>
+        <member name="M:Orion.Authorization.IAccountService.AddAccountAsync(System.String)">
+            <summary>
+            Asynchronously adds an account with the specified account name to the account service in the default group.
+            </summary>
+            <param name="accountName">
+            A string referring to the account name.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if <paramref name="accountName"/> is null or empty.
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the account name already exists.
+            </exception>
+        </member>
+        <member name="M:Orion.Authorization.IAccountService.DeleteAccount(Orion.Authorization.IAccount)">
+            <summary>
+            Deletes a user account.
+            </summary>
+            <param name="account">
+            A reference to the <see cref="T:Orion.Authorization.IAccount"/> to delete.
+            </param>
+        </member>
+        <member name="M:Orion.Authorization.IAccountService.DeleteAccountAsync(Orion.Authorization.IAccount)">
+            <summary>
+            Asynchronously deletes a user account.
+            </summary>
+            <param name="account">
+            A reference to the <see cref="T:Orion.Authorization.IAccount"/> to delete.
+            </param>
+        </member>
+        <member name="M:Orion.Authorization.IAccountService.SetPassword(Orion.Authorization.IAccount,System.String)">
+            <summary>
+            Sets the account password to the specified password in clear-text.
+            </summary>
+            <param name="account">
+            A reference to the <see cref="T:Orion.Authorization.IAccount"/> to set the password.
+            </param>
+            <param name="password">
+            A string containing the clear text password of the account to be changed to.
+            </param>
+            <remarks>
+            This method force-updates the password on this account without re-authenticating, and should be considered
+            an admin-only function.
+            </remarks>
+        </member>
+        <member name="M:Orion.Authorization.IAccountService.SetPasswordAsync(Orion.Authorization.IAccount,System.String)">
+            <summary>
+            Asynchronously sets the account password to the specified password in clear-text.
+            </summary>
+            <param name="account">
+            A reference to the <see cref="T:Orion.Authorization.IAccount"/> to set the password.
+            </param>
+            <param name="password">
+            A string containing the clear text password of the account to be changed to.
+            </param>
+            <remarks>
+            This method force-updates the password on this account without re-authenticating, and should be considered
+            an admin-only function.
+            </remarks>
+        </member>
+        <member name="M:Orion.Authorization.IAccountService.ChangePassword(Orion.Authorization.IAccount,System.String,System.String)">
+            <summary>
+            Updates the account password with a clear-text password specified by <paramref name="newPassword"/>,
+            if the current password on the account matches the clear-text password specified by
+            <paramref name="currentPassword"/>.
+            </summary>
+            <param name="account">
+            A reference to the <see cref="T:Orion.Authorization.IAccount"/> to change the password.
+            </param>
+            <param name="currentPassword">
+            A string containing the clear-text password currently on the account.
+            </param>
+            <param name="newPassword">
+            A string containing the new clear-text password for the account, if the current password matches.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if <paramref name="currentPassword"/> or <paramref name="newPassword"/> is null or empty.
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown if authentication failed on the account specifying <paramref name="currentPassword"/>, or
+            <paramref name="newPassword"/> does not meet the password complexity requirements.
+            </exception>
+        </member>
+        <member name="M:Orion.Authorization.IAccountService.ChangePasswordAsync(Orion.Authorization.IAccount,System.String,System.String)">
+            <summary>
+            Asynchronously updates the account password with a clear-text password specified by
+            <paramref name="newPassword"/>, if the current password on the account matches the clear-text password
+            specified by <paramref name="currentPassword"/>.
+            </summary>
+            <param name="account">
+            A reference to the <see cref="T:Orion.Authorization.IAccount"/> to change the password.
+            </param>
+            <param name="currentPassword">
+            A string containing the clear-text password currently on the account.
+            </param>
+            <param name="newPassword">
+            A string containing the new clear-text password for the account, if the current password matches.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if <paramref name="currentPassword"/> or <paramref name="newPassword"/> is null or empty.
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown if authentication failed on the account specifying <paramref name="currentPassword"/>, or
+            <paramref name="newPassword"/> does not meet the password complexity requirements.
+            </exception>
+        </member>
+        <member name="M:Orion.Authorization.IAccountService.Authenticate(Orion.Authorization.IAccount,System.String)">
+            <summary>
+            Authenticates this user account with the specified clear-text password.
+            </summary>
+            <param name="account">
+            A reference to the <see cref="T:Orion.Authorization.IAccount"/> to authenticate with.
+            </param>
+            <param name="password">
+            A string containing the clear-text password to authenticate this account with.
+            </param>
+            <returns>
+            true if the account authentication succeeded, false otherwise.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when <paramref name="password"/> is null or empty.
+            </exception>
+        </member>
+        <member name="M:Orion.Authorization.IAccountService.AuthenticateAsync(Orion.Authorization.IAccount,System.String)">
+            <summary>
+            Asynchronously authenticates this user account with the specified clear-text password.
+            </summary>
+            <param name="account">
+            A reference to the <see cref="T:Orion.Authorization.IAccount"/> to authenticate with.
+            </param>
+            <param name="password">
+            A string containing the clear-text password to authenticate this account with.
+            </param>
+            <returns>
+            true if the account authentication succeeded, false otherwise.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when <paramref name="password"/> is null or empty.
+            </exception>
+        </member>
+        <member name="T:Orion.Authorization.PlainTextAccountService">
+            <summary>
+            Plain text account and group service which sources its account information from flat files in Orion's data
+            subdirectory.
+            </summary>
+        </member>
+        <member name="P:Orion.Authorization.PlainTextAccountService.UserPathPrefix">
+            <summary>
+            The path to where <see cref="T:Orion.Authorization.PlainTextUserAccount"/> objects are stored.
+            </summary>
+        </member>
+        <member name="P:Orion.Authorization.PlainTextAccountService.GroupPathPrefix">
+            <summary>
+            The path to where <see cref="T:Orion.Authorization.PlainTextGroup"/> objects are stored.
+            </summary>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextAccountService.#ctor(Orion.Orion)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextAccountService.FindAccounts(System.Predicate{Orion.Authorization.IAccount})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextAccountService.FindAccountsAsync(System.Predicate{Orion.Authorization.IAccount})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextAccountService.GetAccount(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextAccountService.GetAccountAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextAccountService.AddAccount(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextAccountService.AddAccountAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextAccountService.DeleteAccount(Orion.Authorization.IAccount)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextAccountService.DeleteAccountAsync(Orion.Authorization.IAccount)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextAccountService.SetPassword(Orion.Authorization.IAccount,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextAccountService.SetPasswordAsync(Orion.Authorization.IAccount,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextAccountService.ChangePassword(Orion.Authorization.IAccount,System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextAccountService.ChangePasswordAsync(Orion.Authorization.IAccount,System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextAccountService.Authenticate(Orion.Authorization.IAccount,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextAccountService.AuthenticateAsync(Orion.Authorization.IAccount,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Authorization.PlainTextAccountService.AdministratorGroup">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Authorization.PlainTextAccountService.AnonymousGroup">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextAccountService.FindGroups(System.Predicate{Orion.Authorization.IGroup})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextAccountService.FindGroupsAsync(System.Predicate{Orion.Authorization.IGroup})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextAccountService.AddGroup(System.String,System.Collections.Generic.IEnumerable{Orion.Authorization.IAccount})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextAccountService.AddGroupAsync(System.String,System.Collections.Generic.IEnumerable{Orion.Authorization.IAccount})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextAccountService.DeleteGroup(Orion.Authorization.IGroup)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextAccountService.DeleteGroupAsync(Orion.Authorization.IGroup)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextAccountService.AddMembers(Orion.Authorization.IGroup,Orion.Authorization.IAccount[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextAccountService.AddMembersAsync(Orion.Authorization.IGroup,Orion.Authorization.IAccount[])">
+            <inheritdoc/>
+        </member>
+        <member name="T:Orion.Authorization.PlainTextGroup">
+            <summary>
+            Plain-text user group used by the <see cref="T:Orion.Authorization.PlainTextAccountService"/>.
+            </summary>
+        </member>
+        <member name="P:Orion.Authorization.PlainTextGroup.Name">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Authorization.PlainTextGroup.Description">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Authorization.PlainTextGroup.Members">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Authorization.PlainTextGroup.Permissions">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Authorization.PlainTextGroup.GroupPath">
+            <summary>
+            Gets the computed group file path based on the group name.
+            </summary>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextGroup.#ctor(Orion.Authorization.PlainTextAccountService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Authorization.PlainTextGroup"/> class.
+            </summary>
+            <param name="service">
+            A reference to the <see cref="T:Orion.Authorization.PlainTextAccountService"/> which owns this user group.
+            </param>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextGroup.#ctor(Orion.Authorization.PlainTextAccountService,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Authorization.PlainTextGroup"/> class with the provided group name, which
+            will load the group data from disk.
+            </summary>
+            <param name="service">
+            A reference to the <see cref="T:Orion.Authorization.PlainTextAccountService"/> which owns this user group.
+            </param>
+            <param name="groupName">A string containing the group name to load from disk.</param>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextGroup.#ctor(Orion.Authorization.PlainTextAccountService,System.IO.Stream)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Authorization.PlainTextGroup"/> class from the specified I/O stream.
+            </summary>
+            <param name="service">
+            A reference to the <see cref="T:Orion.Authorization.PlainTextAccountService"/> which owns this user group.
+            </param>
+            <param name="stream">The I/O stream to load the <see cref="T:Orion.Authorization.PlainTextGroup"/> data from.</param>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextGroup.AddMember(Orion.Authorization.IAccount)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextGroup.AddMemberAsync(Orion.Authorization.IAccount)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextGroup.RemoveMember(Orion.Authorization.IAccount)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextGroup.RemoveMemberAsync(Orion.Authorization.IAccount)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextGroup.HasMember(Orion.Authorization.IAccount)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextGroup.Save">
+            <summary>
+            Saves this plain text group data to file in the pre-computed location.
+            </summary>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextGroup.ToStream(System.IO.Stream)">
+            <summary>
+            Saves this plain text group data into the specified <paramref name="stream"/>.
+            </summary>
+            <param name="stream">The <see cref="T:System.IO.Stream"/> to save the data to.</param>
+        </member>
+        <member name="T:Orion.Authorization.PlainTextUserAccount">
+            <summary>
+            Plain-text user account used by the <see cref="T:Orion.Authorization.PlainTextAccountService"/>.
+            </summary>
+        </member>
+        <member name="P:Orion.Authorization.PlainTextUserAccount.AccountName">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Authorization.PlainTextUserAccount.PasswordHash">
+            <summary>
+            Gets or sets the bcrypt password hash on this account.
+            </summary>
+            <remarks>
+            This is a hidden property. Password hashes must not be leaked outside of this instance.
+            
+            See <see cref="M:Orion.Authorization.PlainTextUserAccount.Authenticate(System.String,System.Nullable{System.Boolean})"/> to authenticate passwords against the stored hash on this
+            account.
+            </remarks>
+        </member>
+        <member name="P:Orion.Authorization.PlainTextUserAccount.AccountFilePath">
+            <summary>
+            Gets the computed account file path on disk according to the normalized account name.
+            </summary>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextUserAccount.#ctor(Orion.Authorization.PlainTextAccountService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Authorization.PlainTextUserAccount"/> class.
+            </summary>
+            <param name="service">
+            A reference to the <see cref="T:Orion.Authorization.PlainTextAccountService"/> which owns this user account.
+            </param>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextUserAccount.#ctor(Orion.Authorization.PlainTextAccountService,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Authorization.PlainTextUserAccount"/> class with the provided account name, which
+            will load the account data from disk.
+            </summary>
+            <param name="service">
+            A reference to the <see cref="T:Orion.Authorization.PlainTextAccountService"/> which owns this user account.
+            </param>
+            <param name="accountName">A string containing the account name to load from disk.</param>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextUserAccount.#ctor(Orion.Authorization.PlainTextAccountService,System.IO.Stream)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Authorization.PlainTextUserAccount"/> class from the specified I/O stream.
+            </summary>
+            <param name="service">
+            A reference to the <see cref="T:Orion.Authorization.PlainTextAccountService"/> which owns this user account.
+            </param>
+            <param name="stream">The I/O stream to load the <see cref="T:Orion.Authorization.PlainTextUserAccount"/> data from.</param>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextUserAccount.MemberOf(Orion.Authorization.IGroup)">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Authorization.PlainTextUserAccount.Permissions">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextUserAccount.HasPermission(Orion.Authorization.IPermission,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextUserAccount.Authenticate(System.String,System.Nullable{System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextUserAccount.AuthenticateAsync(System.String,System.Nullable{System.Boolean})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextUserAccount.SetPassword(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextUserAccount.SetPasswordAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextUserAccount.ChangePassword(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextUserAccount.ChangePasswordAsync(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextUserAccount.Save">
+            <summary>
+            Saves this plain text account to file in the pre-computed location.
+            </summary>
+        </member>
+        <member name="M:Orion.Authorization.PlainTextUserAccount.ToStream(System.IO.Stream)">
+            <summary>
+            Saves this plain text account into the specified stream.
+            </summary>
+        </member>
+        <member name="T:Orion.Authorization.IGroup">
+            <summary>
+            Organises players together into a single entity with a list of permissions that
+            will apply to all players in that group.
+            </summary>
+        </member>
+        <member name="P:Orion.Authorization.IGroup.Name">
+            <summary>
+            Gets the group name.
+            </summary>
+        </member>
+        <member name="P:Orion.Authorization.IGroup.Description">
+            <summary>
+            Gets a human-readable description of the group.
+            </summary>
+            <example>
+            "Enables access into a specific region".
+            </example>
+        </member>
+        <member name="P:Orion.Authorization.IGroup.Members">
+            <summary>
+            Gets all users that are members of this group.
+            </summary>
+        </member>
+        <member name="P:Orion.Authorization.IGroup.Permissions">
+            <summary>
+            Gets all permissions that members of this group inherit.
+            </summary>
+        </member>
+        <member name="M:Orion.Authorization.IGroup.AddMember(Orion.Authorization.IAccount)">
+            <summary>
+            Adds an <see cref="T:Orion.Authorization.IAccount"/> to this group's list of members.
+            </summary>
+            <param name="userAccount">The user account to add.</param>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the <paramref name="userAccount"/> already exists.
+            </exception>
+        </member>
+        <member name="M:Orion.Authorization.IGroup.AddMemberAsync(Orion.Authorization.IAccount)">
+            <summary>
+            Asynchronously adds an <see cref="T:Orion.Authorization.IAccount"/> to this group's list of members.
+            </summary>
+            <param name="userAccount">The user account to add.</param>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when the <paramref name="userAccount"/> already exists.
+            </exception>
+        </member>
+        <member name="M:Orion.Authorization.IGroup.RemoveMember(Orion.Authorization.IAccount)">
+            <summary>
+            Removes an <see cref="T:Orion.Authorization.IAccount"/> from this group's list of members.
+            </summary>
+            <param name="userAccount">A reference to the user account to be removed.</param>
+        </member>
+        <member name="M:Orion.Authorization.IGroup.RemoveMemberAsync(Orion.Authorization.IAccount)">
+            <summary>
+            Asynchronously emoves an <see cref="T:Orion.Authorization.IAccount"/> from this group's list of members.
+            </summary>
+            <param name="userAccount">A reference to the user account to be removed.</param>
+        </member>
+        <member name="M:Orion.Authorization.IGroup.HasMember(Orion.Authorization.IAccount)">
+            <summary>
+            Determines whether this group contains the specified user account.
+            </summary>
+            <param name="userAccount">The user account to check.</param>
+            <returns>true if the group contains the <paramref name="userAccount"/>, false otherwise.</returns>
+        </member>
+        <member name="M:Orion.Authorization.IGroup.HasMemberAsync(Orion.Authorization.IAccount)">
+            <summary>
+            Asynchronously determines whether this group contains the specified user account.
+            </summary>
+            <param name="userAccount">The user account to check.</param>
+            <returns>true if the group contains the <paramref name="userAccount"/>, false otherwise.</returns>
+        </member>
+        <member name="T:Orion.Authorization.IPermission">
+            <summary>
+            An authorization object which controls player access to Orion features, such as commands and
+            custom plugin functionality.
+            </summary>
+        </member>
+        <member name="P:Orion.Authorization.IPermission.Name">
+            <summary>
+            Gets the permission name.  Must not contain any period (".") characters.
+            </summary>
+        </member>
+        <member name="P:Orion.Authorization.IPermission.Description">
+            <summary>
+            Gets a human-readable description of the permission.
+            </summary>
+            <remarks>
+            It is helpful to include what the permission is for in your description.
+            </remarks>
+            <example>
+            "Enables access to the teleport command in tshock".
+            </example>
+        </member>
+        <member name="P:Orion.Authorization.IPermission.Parent">
+            <summary>
+            Gets the parent permission in the permission tree.
+            </summary>
+        </member>
+        <member name="P:Orion.Authorization.IPermission.ChildPermissions">
+            <summary>
+            Gets all the permission objects that are listed as children of this permission.
+            </summary>
+        </member>
+        <member name="M:Orion.Authorization.IPermission.HasPermission(Orion.Players.IPlayer,System.Boolean)">
+            <summary>
+            Determines whether the specified player has this permission, or optionally any parent permission.
+            </summary>
+            <param name="player">
+            A reference to a player object to check for permissions.
+            </param>
+            <param name="inherit">
+            (optional) A flag indicating whether to check all parents of this permission for authorization.
+            </param>
+            <returns>
+            true if the player has this permission, or optionally any parent permission, false otherwise.
+            </returns>
+        </member>
+        <member name="T:Orion.Authorization.IAccount">
+            <summary>
+            Describes an Orion user account.
+            </summary>
+        </member>
+        <member name="P:Orion.Authorization.IAccount.AccountName">
+            <summary>
+            Gets or sets the Orion account name.
+            </summary>
+        </member>
+        <member name="M:Orion.Authorization.IAccount.MemberOf(Orion.Authorization.IGroup)">
+            <summary>
+            Determines if the user account is a member of the specified group.
+            </summary>
+            <param name="group">
+            A reference to an Orion group to check if the user account is a member of.
+            </param>
+            <returns>
+            true if the user account is found to be a part of the specified group, false otherwise.
+            </returns>
+        </member>
+        <member name="P:Orion.Authorization.IAccount.Permissions">
+            <summary>
+            Gets all permissions in all groups this user account is a member of.
+            </summary>
+        </member>
+        <member name="M:Orion.Authorization.IAccount.HasPermission(Orion.Authorization.IPermission,System.Boolean)">
+            <summary>
+            Determines whether this user account has the specified permission.
+            </summary>
+            <param name="permission">The <see cref="T:Orion.Authorization.IPermission"/> to check.</param>
+            <param name="inherit">Whether or not to include permissions inherited from parent groups.</param>
+            <returns>true if the user account has the permission, false otherwise.</returns>
+        </member>
+        <member name="M:Orion.Authorization.IAccount.Authenticate(System.String,System.Nullable{System.Boolean})">
+            <summary>
+            Authenticates a login attempt to this account by the specified clear-text <paramref name="password"/>.
+            </summary>
+            <param name="password">
+            A string containing the clear-text password for this user account.
+            </param>
+            <param name="ignoreExpiry">
+            (optional) A flag indicating whether to ignore the password expiry on this account and authenticate anyway.
+            </param>
+            <returns>
+            true if authentication succeeded, false otherwise.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when <paramref name="password"/> is null or empty.
+            </exception>
+        </member>
+        <member name="M:Orion.Authorization.IAccount.AuthenticateAsync(System.String,System.Nullable{System.Boolean})">
+            <summary>
+            Asynchronously authenticates a login attempt to this account by the specified clear-text
+            <paramref name="password"/>.
+            </summary>
+            <param name="password">
+            A string containing the clear-text password for this user account.
+            </param>
+            <param name="ignoreExpiry">
+            (optional) A flag indicating whether to ignore the password expiry on this account and authenticate anyway.
+            </param>
+            <returns>
+            true if authentication succeeded, false otherwise.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when <paramref name="password"/> is null or empty.
+            </exception>
+        </member>
+        <member name="M:Orion.Authorization.IAccount.SetPassword(System.String)">
+            <summary>
+            Sets the password on this account to the clear-text password specified.
+            </summary>
+            <param name="password">
+            A clear-text password to set the account password to.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when <paramref name="password"/> is null or empty.
+            </exception>
+        </member>
+        <member name="M:Orion.Authorization.IAccount.SetPasswordAsync(System.String)">
+            <summary>
+            Asynchronously sets the password on this account to the clear-text password specified.
+            </summary>
+            <param name="password">
+            A clear-text password to set the account password to.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when <paramref name="password"/> is null or empty.
+            </exception>
+        </member>
+        <member name="M:Orion.Authorization.IAccount.ChangePassword(System.String,System.String)">
+            <summary>
+            Sets the password on this account to the clear-text password specified, authenticating the current user
+            first.
+            </summary>
+            <param name="currentPassword">
+            A string containing the current password in clear-text for authenticating.
+            </param>
+            <param name="newPassword">
+            A string containing the new password to set on the account, if authentication succeeds.
+            </param>
+            <exception cref="T:System.Security.Authentication.AuthenticationException">
+            Thrown when <paramref name="currentPassword"/> does not match the current password on the account.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when <paramref name="currentPassword"/> or <paramref name="newPassword"/> are null or empty.
+            </exception>
+        </member>
+        <member name="M:Orion.Authorization.IAccount.ChangePasswordAsync(System.String,System.String)">
+            <summary>
+            Asynchronously sets the password on this account to the clear-text password specified, authenticating the
+            current user first.
+            </summary>
+            <param name="currentPassword">
+            A string containing the current password in clear-text for authenticating.
+            </param>
+            <param name="newPassword">
+            A string containing the new password to set on the account, if authentication succeeds.
+            </param>
+            <exception cref="T:System.Security.Authentication.AuthenticationException">
+            Thrown when <paramref name="currentPassword"/> does not match the current password on the account.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when <paramref name="currentPassword"/> or <paramref name="newPassword"/> are null or empty.
+            </exception>
+        </member>
+        <member name="T:Orion.Configuration.YamlFileConfigurationService`1">
+            <summary>
+            Configuration service which loads and saves configuration from disk in YAML
+            format, using YamlDotNet to load/store data.
+            </summary>
+        </member>
+        <member name="P:Orion.Configuration.YamlFileConfigurationService`1.ConfigurationRootDirectory">
+            <summary>
+            Gets the configuration root directory, relative to Orion's working path.
+            </summary>
+        </member>
+        <member name="P:Orion.Configuration.YamlFileConfigurationService`1.Configuration">
+            <inheritdoc />
+        </member>
+        <member name="M:Orion.Configuration.YamlFileConfigurationService`1.#ctor(Orion.Orion)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Configuration.YamlFileConfigurationService`1"/> class.
+            </summary>
+            <param name="orion">The parent <see cref="T:Orion.Orion"/> instance.</param>
+        </member>
+        <member name="M:Orion.Configuration.YamlFileConfigurationService`1.Load(System.IO.Stream)">
+            <inheritdoc />
+        </member>
+        <member name="M:Orion.Configuration.YamlFileConfigurationService`1.Load">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Configuration.YamlFileConfigurationService`1.Save">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Configuration.YamlFileConfigurationService`1.Save(System.IO.Stream)">
+            <inheritdoc />
+        </member>
+        <member name="T:Orion.Configuration.IConfigurationService`1">
+            <summary>
+            Provides a generic interface to interact with persistent configuration for plugins
+            and services without having to deal with where the data loads and saves from.
+            </summary>
+        </member>
+        <member name="P:Orion.Configuration.IConfigurationService`1.Configuration">
+            <summary>
+            Gets the <typeparamref name="TConfiguration"/> object associated with this configuration service.
+            </summary>
+        </member>
+        <member name="M:Orion.Configuration.IConfigurationService`1.Load(System.IO.Stream)">
+            <summary>
+            Loads a <typeparamref name="TConfiguration"/> from a custom stream.
+            </summary>
+        </member>
+        <member name="M:Orion.Configuration.IConfigurationService`1.Load">
+            <summary>
+            Loads a <typeparamref name="TConfiguration"/> object from the implementation's default data store, and sets
+            the <see cref="P:Orion.Configuration.IConfigurationService`1.Configuration"/> object to the deserialized representation of the configuration.
+            </summary>
+        </member>
+        <member name="M:Orion.Configuration.IConfigurationService`1.Save">
+            <summary>
+            Saves the <typeparamref name="TConfiguration"/> object to the implementaton's default persistent storage.
+            </summary>
+        </member>
+        <member name="M:Orion.Configuration.IConfigurationService`1.Save(System.IO.Stream)">
+            <summary>
+            Saves the <typeparamref name="TConfiguration"/> object to a custom stream.
+            </summary>
+        </member>
+        <member name="T:Orion.Configuration.JsonFileConfigurationService`1">
+            <summary>
+            Configuration service which loads and saves configuration from disk in JSON
+            format, using Newtonsoft.Json to load/store data.
+            </summary>
+        </member>
+        <member name="P:Orion.Configuration.JsonFileConfigurationService`1.ConfigurationDirectory">
+            <summary>
+            Gets the configuration directory.
+            </summary>
+        </member>
+        <member name="P:Orion.Configuration.JsonFileConfigurationService`1.Configuration">
+            <inheritdoc />
+        </member>
+        <member name="M:Orion.Configuration.JsonFileConfigurationService`1.#ctor(Orion.Orion)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Configuration.JsonFileConfigurationService`1"/> class.
+            </summary>
+            <param name="orion">The parent <see cref="T:Orion.Orion"/> instance.</param>
+        </member>
+        <member name="M:Orion.Configuration.JsonFileConfigurationService`1.Load(System.IO.Stream)">
+            <inheritdoc />
+        </member>
+        <member name="M:Orion.Configuration.JsonFileConfigurationService`1.Load">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Configuration.JsonFileConfigurationService`1.Save">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Configuration.JsonFileConfigurationService`1.Save(System.IO.Stream)">
+            <inheritdoc />
+        </member>
+        <member name="T:Orion.Entities.IOrionEntity">
+            <summary>
+            Provides a wrapper around a <see cref="T:Terraria.Entity"/>
+            </summary>
+        </member>
+        <member name="P:Orion.Entities.IOrionEntity.Height">
+            <summary>
+            Gets or sets the entity's height in pixels.
+            </summary>
+        </member>
+        <member name="P:Orion.Entities.IOrionEntity.Position">
+            <summary>
+            Gets or sets the entity's position in the world.
+            </summary>
+        </member>
+        <member name="P:Orion.Entities.IOrionEntity.Velocity">
+            <summary>
+            Gets or sets the entity's velocity in the world.
+            </summary>
+        </member>
+        <member name="P:Orion.Entities.IOrionEntity.Width">
+            <summary>
+            Gets or sets the entity's width in pixels.
+            </summary>
+        </member>
+        <member name="P:Orion.Entities.IOrionEntity.WrappedEntity">
+            <summary>
+            Gets the wrapped <see cref="T:Terraria.Entity"/> instance.
+            </summary>
+        </member>
+        <member name="M:Orion.Entities.IOrionEntity.Kill">
+            <summary>
+            Kills the entity.
+            </summary>
+        </member>
+        <member name="P:Orion.Entities.OrionEntity.Position">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Entities.OrionEntity.Velocity">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Entities.OrionEntity.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Entities.OrionEntity.WrappedEntity">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Entities.OrionEntity.#ctor(Terraria.Entity)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Entities.OrionEntity"/> class wrapping the specified Terraria Entity instance.
+            </summary>
+            <param name="entity">The Terraria Entity instance to wrap.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="entity"/> is null.</exception>
+        </member>
+        <member name="M:Orion.Entities.OrionEntity.Kill">
+            <inheritdoc/>
+        </member>
+        <member name="T:Orion.Extensions.StringExtensions">
+            <summary>
+            A collection of extensions for the <see cref="T:System.String"/> type.
+            </summary>
+        </member>
+        <member name="M:Orion.Extensions.StringExtensions.Slugify(System.String)">
+            <summary>
+            Converts this string instance to its URL slug equivalent
+            </summary>
+            <param name="phrase">
+            The string phrase to return the slug for
+            </param>
+            <returns>
+            The slugified string equivalent of the <paramref name="phrase"/>.
+            </returns>
+        </member>
+        <member name="T:Orion.Framework.IService">
+            <summary>
+            Describes an Orion service.
+            </summary>
+            <remarks>
+            Services are modules providing a specific type of functionality to consumers. New instances will always be
+            injected into objects, and will be disposed of some time after the object is garbage collected. Therefore, they
+            can contain instance-specific state.
+            </remarks>
+        </member>
+        <member name="P:Orion.Framework.IService.Author">
+            <summary>
+            Gets the service's author.
+            </summary>
+        </member>
+        <member name="P:Orion.Framework.IService.Name">
+            <summary>
+            Gets the service's name.
+            </summary>
+        </member>
+        <member name="P:Orion.Framework.IService.Version">
+            <summary>
+            Gets the service's version.
+            </summary>
+        </member>
+        <member name="T:Orion.Framework.ISharedService">
+            <summary>
+            Describes a shared Orion service.
+            </summary>
+            <remarks>
+            Shared services are singleton services: the same instance will always be injected. Therefore, they cannot
+            contain instance-specific state.
+            </remarks>
+        </member>
+        <member name="P:Orion.Framework.ISharedService.Author">
+            <summary>
+            Gets the service's author.
+            </summary>
+        </member>
+        <member name="P:Orion.Framework.ISharedService.Name">
+            <summary>
+            Gets the service's name.
+            </summary>
+        </member>
+        <member name="P:Orion.Framework.ISharedService.Version">
+            <summary>
+            Gets the service's version.
+            </summary>
+        </member>
+        <member name="T:Orion.Framework.OrionModule">
+            <summary>
+            A Ninject module that scans for services, shared services, and plugins in the executing and plugin assemblies,
+            binding them into the appropriate scope.
+            </summary>
+        </member>
+        <member name="M:Orion.Framework.OrionModule.Load">
+            <inheritdoc/>
+        </member>
+        <member name="T:Orion.Framework.Plugin">
+            <summary>
+            Provides the base class for a plugin.
+            </summary>
+            <remarks>
+            Plugins are modules that provide general functionality. Like shared services, the same instance will always be
+            injected.
+            </remarks>
+        </member>
+        <member name="P:Orion.Framework.Plugin.Author">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Framework.Plugin.Name">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Framework.Plugin.Orion">
+            <summary>
+            Gets the Orion instance that this plugin belongs to.
+            </summary>
+        </member>
+        <member name="P:Orion.Framework.Plugin.Version">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Framework.Plugin.#ctor(Orion.Orion)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Framework.Plugin"/> class.
+            </summary>
+            <param name="orion">The Orion instance that this plugin belongs to.</param>
+        </member>
+        <member name="M:Orion.Framework.Plugin.Finalize">
+            <summary>
+            Destroys the plugin, releasing any of its unmanged resources.
+            </summary>
+        </member>
+        <member name="M:Orion.Framework.Plugin.Dispose">
+            <summary>
+            Disposes the plugin and any of its unmanaged and managed resources.
+            </summary>
+        </member>
+        <member name="M:Orion.Framework.Plugin.Dispose(System.Boolean)">
+            <summary>
+            Disposes the plugin and any of its unmanaged resources, optionally including its managed resources.
+            </summary>
+            <param name="disposing">
+            <c>true</c> if called from a managed disposal and both unmanaged and managed resources must be released,
+            <c>false</c> if called from a finalizer and only unmanaged resources must be released.
+            </param>
+            <remarks>
+            If your plugin has unmanaged resources, you must release them here.
+            </remarks>
+        </member>
+        <member name="T:Orion.Framework.PluginAttribute">
+            <summary>
+            Provides information about a plugin.
+            </summary>
+        </member>
+        <member name="P:Orion.Framework.PluginAttribute.Author">
+            <summary>
+            Gets or sets the plugin's author.
+            </summary>
+        </member>
+        <member name="P:Orion.Framework.PluginAttribute.Name">
+            <summary>
+            Gets the plugin's name.
+            </summary>
+        </member>
+        <member name="M:Orion.Framework.PluginAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Framework.PluginAttribute"/> class.
+            </summary>
+            <param name="name">The plugin's name.</param>
+        </member>
+        <member name="T:Orion.Framework.Service">
+            <summary>
+            Provides the base class for a service.
+            </summary>
+        </member>
+        <member name="P:Orion.Framework.Service.Author">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Framework.Service.Name">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Framework.Service.Orion">
+            <summary>
+            Gets the Orion instance that this service belongs to.
+            </summary>
+        </member>
+        <member name="P:Orion.Framework.Service.Version">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Framework.Service.#ctor(Orion.Orion)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Framework.Service"/> class.
+            </summary>
+            <param name="orion">The Orion instance that this service belongs to.</param>
+        </member>
+        <member name="M:Orion.Framework.Service.Finalize">
+            <summary>
+            Destroys the service, releasing any of its unmanged resources.
+            </summary>
+        </member>
+        <member name="M:Orion.Framework.Service.Dispose">
+            <summary>
+            Disposes the service and any of its unmanaged and managed resources.
+            </summary>
+        </member>
+        <member name="M:Orion.Framework.Service.Dispose(System.Boolean)">
+            <summary>
+            Disposes the service and any of its unmanaged resources, optionally including its managed resources.
+            </summary>
+            <param name="disposing">
+            <c>true</c> if called from a managed disposal and both unmanaged and managed resources must be released,
+            <c>false</c> if called from a finalizer and only unmanaged resources must be released.
+            </param>
+            <remarks>
+            If your service has unmanaged resources, you must release them here.
+            </remarks>
+        </member>
+        <member name="T:Orion.Framework.ServiceAttribute">
+            <summary>
+            Provides information about a service.
+            </summary>
+        </member>
+        <member name="P:Orion.Framework.ServiceAttribute.Author">
+            <summary>
+            Gets or sets the service's author.
+            </summary>
+        </member>
+        <member name="P:Orion.Framework.ServiceAttribute.Name">
+            <summary>
+            Gets the service's name.
+            </summary>
+        </member>
+        <member name="M:Orion.Framework.ServiceAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Framework.ServiceAttribute"/> class.
+            </summary>
+            <param name="name">The service's name.</param>
+        </member>
+        <member name="T:Orion.Framework.SharedService">
+            <summary>
+            Provides the base class for a shared service.
+            </summary>
+        </member>
+        <member name="P:Orion.Framework.SharedService.Author">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Framework.SharedService.Name">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Framework.SharedService.Orion">
+            <summary>
+            Gets the Orion instance that this shared service belongs to.
+            </summary>
+        </member>
+        <member name="P:Orion.Framework.SharedService.Version">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Framework.SharedService.#ctor(Orion.Orion)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Framework.SharedService"/> class.
+            </summary>
+            <param name="orion">The Orion instance that this shared service belongs to.</param>
+        </member>
+        <member name="T:Orion.Items.AnimationStyle">
+            <summary>
+            Specifies an item's animation style.
+            </summary>
+        </member>
+        <member name="T:Orion.Items.Events.ItemSetDefaultsEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.Items.IItemService.ItemSetDefaults"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.Events.ItemSetDefaultsEventArgs.Item">
+            <summary>
+            Gets the item that had its defaults set.
+            </summary>
+        </member>
+        <member name="M:Orion.Items.Events.ItemSetDefaultsEventArgs.#ctor(Orion.Items.IItem)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Items.Events.ItemSetDefaultsEventArgs"/> class.
+            </summary>
+            <param name="item">The item that had its defaults set.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="item"/> is null.</exception>
+        </member>
+        <member name="T:Orion.Items.Events.ItemSettingDefaultsEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.Items.IItemService.ItemSettingDefaults"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.Events.ItemSettingDefaultsEventArgs.Item">
+            <summary>
+            Gets the item that is having its defaults set.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.Events.ItemSettingDefaultsEventArgs.Type">
+            <summary>
+            Gets or sets the <see cref="T:Orion.Items.ItemType"/> that the item is having its defaults set to.
+            </summary>
+        </member>
+        <member name="M:Orion.Items.Events.ItemSettingDefaultsEventArgs.#ctor(Orion.Items.IItem,Orion.Items.ItemType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Items.Events.ItemSettingDefaultsEventArgs"/> class.
+            </summary>
+            <param name="item">The item that is having its defaults set.</param>
+            <param name="type">The <see cref="T:Orion.Items.ItemType"/> that the item is having its defaults set to.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="item"/> is null.</exception>
+        </member>
+        <member name="T:Orion.Items.IItem">
+            <summary>
+            Provides a wrapper around a Terraria item instance.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.AmmoType">
+            <summary>
+            Gets or sets the item's ammo type.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.AnimationStyle">
+            <summary>
+            Gets or sets the item's <see cref="T:Orion.Items.AnimationStyle"/>.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.AnimationTime">
+            <summary>
+            Gets or sets the item's animation time.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.AxePower">
+            <summary>
+            Gets or sets the item's axe power.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.BaitPower">
+            <summary>
+            Gets or sets the item's bait power.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.CanAutoReuse">
+            <summary>
+            Gets or sets a value indicating whether the item can automatically be reused.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.Color">
+            <summary>
+            Gets or sets the item's color.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.Damage">
+            <summary>
+            Gets or sets the item's damage.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.FishingPower">
+            <summary>
+            Gets or sets the item's fishing power.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.GraphicalScale">
+            <summary>
+            Gets or sets the item's graphical scale.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.HammerPower">
+            <summary>
+            Gets or sets the item's hammer power.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.Height">
+            <summary>
+            Gets or sets the item's height.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.IsAccessory">
+            <summary>
+            Gets or sets a value indicating whether the item is an accessory.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.IsMagicWeapon">
+            <summary>
+            Gets or sets a value indicating whether the item is a magic weapon.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.IsMeleeWeapon">
+            <summary>
+            Gets or sets a value indicating whether the item is a melee weapon.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.IsRangedWeapon">
+            <summary>
+            Gets or sets a value indicating whether the item is a ranged weapon.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.IsThrownWeapon">
+            <summary>
+            Gets or sets a value indicating whether the item is a thrown weapon.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.Knockback">
+            <summary>
+            Gets or sets the item's knockback.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.ManaCost">
+            <summary>
+            Gets or sets the item's mana cost.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.MaxStackSize">
+            <summary>
+            Gets or sets the item's maximum stack size.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.Name">
+            <summary>
+            Gets or sets the item's name.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.PickaxePower">
+            <summary>
+            Gets or sets the item's pickaxe power.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.Position">
+            <summary>
+            Gets or sets the item's position in the world.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.Prefix">
+            <summary>
+            Gets the item's <see cref="T:Orion.Items.Prefix"/>.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.ProjectileSpeed">
+            <summary>
+            Gets or sets the item's projectile speed.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.ProjectileType">
+            <summary>
+            Gets or sets the item's <see cref="T:Orion.Projectiles.ProjectileType"/>.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.Rarity">
+            <summary>
+            Gets or sets the item's <see cref="T:Orion.Items.Rarity"/>.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.StackSize">
+            <summary>
+            Gets or sets the item's stack size.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.Type">
+            <summary>
+            Gets the item's <see cref="T:Orion.Items.ItemType"/>.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.UseAmmoType">
+            <summary>
+            Gets or sets the item's used ammo type.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.UseTime">
+            <summary>
+            Gets or sets the item's use time.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.Velocity">
+            <summary>
+            Gets or sets the item's velocity in the world.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.Width">
+            <summary>
+            Gets or sets the item's width.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItem.WrappedItem">
+            <summary>
+            Gets the wrapped Terraria item instance.
+            </summary>
+        </member>
+        <member name="M:Orion.Items.IItem.SetDefaults(Orion.Items.ItemType)">
+            <summary>
+            Sets the item's defaults using an <see cref="T:Orion.Items.ItemType"/>.
+            </summary>
+            <param name="type">The <see cref="T:Orion.Items.ItemType"/>.</param>
+        </member>
+        <member name="M:Orion.Items.IItem.SetPrefix(Orion.Items.Prefix)">
+            <summary>
+            Tries to set the item's prefix using an <see cref="T:Orion.Items.Prefix"/>.
+            </summary>
+            <param name="prefix">The <see cref="T:Orion.Items.Prefix"/>.</param>
+        </member>
+        <member name="T:Orion.Items.IItemArray">
+            <summary>
+            Provides a wrapper around an array of Terraria item instances.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItemArray.Item(System.Int32)">
+            <summary>
+            Gets or sets the item at the specified index in the array.
+            </summary>
+            <param name="index">The index.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            <paramref name="index"/> is negative or greater than or equal to <see cref="P:Orion.Items.IItemArray.Length"/>.
+            </exception>
+        </member>
+        <member name="P:Orion.Items.IItemArray.Length">
+            <summary>
+            Gets the array's length.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.IItemArray.WrappedItemArray">
+            <summary>
+            Gets the wrapped array of Terraria item instances.
+            </summary>
+        </member>
+        <member name="T:Orion.Items.IItemService">
+            <summary>
+            Provides a mechanism for managing items.
+            </summary>
+        </member>
+        <member name="E:Orion.Items.IItemService.ItemSetDefaults">
+            <summary>
+            Occurs after an item has had its defaults set.
+            </summary>
+        </member>
+        <member name="E:Orion.Items.IItemService.ItemSettingDefaults">
+            <summary>
+            Occurs when an item is having its defaults set.
+            </summary>
+        </member>
+        <member name="M:Orion.Items.IItemService.CreateItem(Orion.Items.ItemType,System.Int32,Orion.Items.Prefix)">
+            <summary>
+            Creates a new item using the specified <see cref="T:Orion.Items.ItemType"/>, optionally with the
+            specified stack size and <see cref="T:Orion.Items.Prefix"/>.
+            </summary>
+            <param name="type">The <see cref="T:Orion.Items.ItemType"/>.</param>
+            <param name="stackSize">The stack size.</param>
+            <param name="prefix">The <see cref="T:Orion.Items.Prefix"/>.</param>
+            <returns>The resulting item.</returns>
+        </member>
+        <member name="M:Orion.Items.IItemService.FindItems(System.Predicate{Orion.Items.IItem})">
+            <summary>
+            Returns all items in the world, optionally matching a predicate.
+            </summary>
+            <param name="predicate">The predicate.</param>
+            <returns>An enumerable collection of items.</returns>
+        </member>
+        <member name="M:Orion.Items.IItemService.SpawnItem(Orion.Items.ItemType,Microsoft.Xna.Framework.Vector2,System.Int32,Orion.Items.Prefix)">
+            <summary>
+            Spawns a new item using the specified <see cref="T:Orion.Items.ItemType"/> at the position in the
+            world, optionally with the specified stack size and <see cref="T:Orion.Items.Prefix"/>.
+            </summary>
+            <param name="type">The <see cref="T:Orion.Items.ItemType"/>.</param>
+            <param name="position">The position in the world.</param>
+            <param name="stackSize">The stack size.</param>
+            <param name="prefix">The <see cref="T:Orion.Items.Prefix"/>.</param>
+            <returns>The resulting item.</returns>
+        </member>
+        <member name="T:Orion.Items.Item">
+            <summary>
+            Wraps a Terraria item instance.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.Item.AmmoType">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.AnimationStyle">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.AnimationTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.AxePower">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.BaitPower">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.CanAutoReuse">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.Color">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.Damage">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.FishingPower">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.GraphicalScale">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.HammerPower">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.IsAccessory">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.IsMagicWeapon">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.IsMeleeWeapon">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.IsRangedWeapon">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.IsThrownWeapon">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.Knockback">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.ManaCost">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.MaxStackSize">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.Name">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.PickaxePower">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.Position">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.Prefix">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.ProjectileSpeed">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.ProjectileType">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.Rarity">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.StackSize">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.Type">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.UseAmmoType">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.UseTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.Velocity">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.Item.WrappedItem">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Items.Item.#ctor(Terraria.Item)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Items.Item"/> class wrapping the specified Terraria item instance.
+            </summary>
+            <param name="terrariaItem">The Terraria item instance to wrap.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="terrariaItem"/> is null.</exception>
+        </member>
+        <member name="M:Orion.Items.Item.SetDefaults(Orion.Items.ItemType)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Items.Item.SetPrefix(Orion.Items.Prefix)">
+            <inheritdoc/>
+            <remarks>
+            If <paramref name="prefix"/> is not applicable to the item type, then a randomly chosen prefix will be
+            used.
+            </remarks>
+        </member>
+        <member name="T:Orion.Items.ItemArray">
+            <summary>
+            Wraps an array of Terraria item instances.
+            </summary>
+        </member>
+        <member name="P:Orion.Items.ItemArray.Item(System.Int32)">
+            <inheritdoc/>
+            <remarks>
+            The <see cref="T:Orion.Items.IItem"/> instances are cached in an array. Calling this method multiple times will result
+            in the same <see cref="T:Orion.Items.IItem"/> instances as long as the wrapped Terraria item array remains unchanged.
+            </remarks>
+        </member>
+        <member name="P:Orion.Items.ItemArray.Length">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Items.ItemArray.WrappedItemArray">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Items.ItemArray.#ctor(Terraria.Item[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Items.ItemArray"/> class wrapping the specified array of Terraria
+            item instances.
+            </summary>
+            <param name="terrariaItemArray">The array of Terraria item instances.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="terrariaItemArray"/> is null.</exception>
+        </member>
+        <member name="T:Orion.Items.Prefix">
+            <summary>
+            Specifies an item's prefix.
+            </summary>
+        </member>
+        <member name="T:Orion.Items.ItemService">
+            <summary>
+            Manages items.
+            </summary>
+        </member>
+        <member name="E:Orion.Items.ItemService.ItemSetDefaults">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.Items.ItemService.ItemSettingDefaults">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Items.ItemService.#ctor(Orion.Orion)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Items.ItemService"/> class.
+            </summary>
+            <param name="orion">The parent <see cref="T:Orion.Orion"/> instance.</param>
+        </member>
+        <member name="M:Orion.Items.ItemService.CreateItem(Orion.Items.ItemType,System.Int32,Orion.Items.Prefix)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Items.ItemService.FindItems(System.Predicate{Orion.Items.IItem})">
+            <inheritdoc/>
+            <remarks>
+            The items are cached in an array. Calling this method multiple times will result in the same instances as
+            long as Terraria's item array remains unchanged.
+            </remarks>
+        </member>
+        <member name="M:Orion.Items.ItemService.SpawnItem(Orion.Items.ItemType,Microsoft.Xna.Framework.Vector2,System.Int32,Orion.Items.Prefix)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Orion.Items.ItemType">
+            <summary>
+            Specifies an item's type.
+            </summary>
+        </member>
+        <member name="T:Orion.Items.Rarity">
+            <summary>
+            Specifies an item's rarity.
+            </summary>
+        </member>
+        <member name="T:Orion.Networking.Events.ReceivedPacketEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.Networking.INetworkService.ReceivedPacket"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Networking.Events.ReceivedPacketEventArgs.Packet">
+            <summary>
+            Gets the packet that was received.
+            </summary>
+        </member>
+        <member name="P:Orion.Networking.Events.ReceivedPacketEventArgs.Sender">
+            <summary>
+            Gets the packet's sender.
+            </summary>
+        </member>
+        <member name="M:Orion.Networking.Events.ReceivedPacketEventArgs.#ctor(Terraria.RemoteClient,Multiplicity.Packets.TerrariaPacket)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Networking.Events.ReceivedPacketEventArgs"/> class.
+            </summary>
+            <param name="sender">The packet's sender.</param>
+            <param name="packet">The packet that was received.</param>
+        </member>
+        <member name="T:Orion.Networking.Events.ReceivingPacketEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.Networking.INetworkService.ReceivingPacket"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Networking.Events.ReceivingPacketEventArgs.Packet">
+            <summary>
+            Gets the packet that is being received.
+            </summary>
+        </member>
+        <member name="P:Orion.Networking.Events.ReceivingPacketEventArgs.Sender">
+            <summary>
+            Gets the packet's sender.
+            </summary>
+        </member>
+        <member name="M:Orion.Networking.Events.ReceivingPacketEventArgs.#ctor(Terraria.RemoteClient,Multiplicity.Packets.TerrariaPacket)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Networking.Events.ReceivingPacketEventArgs"/> class.
+            </summary>
+            <param name="sender">The packet's sender.</param>
+            <param name="packet">The packet that is being received.</param>
+        </member>
+        <member name="T:Orion.Networking.INetworkService">
+            <summary>
+            Provides a mechanism for managing the network.
+            </summary>
+        </member>
+        <member name="E:Orion.Networking.INetworkService.ReceivedPacket">
+            <summary>
+            Occurs when a packet was received.
+            </summary>
+        </member>
+        <member name="E:Orion.Networking.INetworkService.ReceivingPacket">
+            <summary>
+            Occurs when a packet is being received.
+            </summary>
+        </member>
+        <member name="M:Orion.Networking.INetworkService.SendPacket(System.Int32,Multiplicity.Packets.TerrariaPacket)">
+            <summary>
+            Sends the specified packet to the target.
+            </summary>
+            <param name="target">The target. <c>-1</c> represents everyone.</param>
+            <param name="packet">The packet.</param>
+        </member>
+        <member name="T:Orion.Npcs.Events.NpcDroppedLootEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.Npcs.INpcService.NpcDroppedLoot"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcDroppedLootEventArgs.Type">
+            <summary>
+            Gets the type of the item that the Npc dropped.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcDroppedLootEventArgs.X">
+            <summary>
+            Gets the loot's X coordinate.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcDroppedLootEventArgs.Y">
+            <summary>
+            Gets the loot's Y coordinate.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcDroppedLootEventArgs.Width">
+            <summary>
+            Gets the loot's width.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcDroppedLootEventArgs.Height">
+            <summary>
+            Gets the loot's height.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcDroppedLootEventArgs.Stack">
+            <summary>
+            Gets the loot's stack.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcDroppedLootEventArgs.Prefix">
+            <summary>
+            Gets the loot's prefix.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcDroppedLootEventArgs.Npc">
+            <summary>
+            Gets the NPC that dropped the loot.
+            </summary>
+        </member>
+        <member name="M:Orion.Npcs.Events.NpcDroppedLootEventArgs.#ctor(Orion.Npcs.INpc,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Npcs.Events.NpcDroppedLootEventArgs"/> class.
+            </summary>
+            <param name="npc">The NPC that dropped the loot.</param>
+            <param name="type">The type of the item that the Npc dropped.</param>
+            <param name="x">The loot's X coordinate.</param>
+            <param name="y">The loot's Y coordinate.</param>
+            <param name="width">The loot's width.</param>
+            <param name="height">The loot's height.</param>
+            <param name="stack">The loot's stack.</param>
+            <param name="prefix">The loot's prefix.</param>
+            <exception cref="T:System.ArgumentNullException">
+            <paramref name="npc"/> is null.
+            </exception>
+        </member>
+        <member name="T:Orion.Npcs.Events.NpcDroppingLootEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.Npcs.INpcService.NpcDroppingLoot"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcDroppingLootEventArgs.Item">
+            <summary>
+            Gets or sets the loot that the NPC is dropping.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcDroppingLootEventArgs.Npc">
+            <summary>
+            Gets the NPC that is dropping the loot.
+            </summary>
+        </member>
+        <member name="M:Orion.Npcs.Events.NpcDroppingLootEventArgs.#ctor(Orion.Npcs.INpc,Orion.Items.IItem)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Npcs.Events.NpcDroppingLootEventArgs"/> class.
+            </summary>
+            <param name="npc">The NPC that is dropping the loot.</param>
+            <param name="item">The loot that the NPC is dropping.</param>
+            <exception cref="T:System.ArgumentNullException">
+            <paramref name="npc"/> or <paramref name="item"/> are null.
+            </exception>
+        </member>
+        <member name="T:Orion.Npcs.Events.NpcKilledEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.Npcs.INpcService.NpcKilled"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcKilledEventArgs.Npc">
+            <summary>
+            Gets the NPC that was killed.
+            </summary>
+        </member>
+        <member name="M:Orion.Npcs.Events.NpcKilledEventArgs.#ctor(Orion.Npcs.INpc)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Npcs.Events.NpcKilledEventArgs"/> class.
+            </summary>
+            <param name="npc">The NPC that was killed.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="npc"/> is null.</exception>
+        </member>
+        <member name="T:Orion.Npcs.Events.NpcSetDefaultsEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.Npcs.INpcService.NpcSetDefaults"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcSetDefaultsEventArgs.Npc">
+            <summary>
+            Gets the <see cref="T:Orion.Npcs.INpc"/> instance that had its defaults set.
+            </summary>
+        </member>
+        <member name="M:Orion.Npcs.Events.NpcSetDefaultsEventArgs.#ctor(Orion.Npcs.INpc)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Npcs.Events.NpcSetDefaultsEventArgs"/> class.
+            </summary>
+            <param name="npc">The <see cref="T:Orion.Npcs.INpc"/> instance that had its defaults set.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="npc"/> is null.</exception>
+        </member>
+        <member name="T:Orion.Npcs.Events.NpcSettingDefaultsEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.Npcs.INpcService.NpcSettingDefaults"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcSettingDefaultsEventArgs.Npc">
+            <summary>
+            Gets the <see cref="T:Orion.Npcs.INpc"/> instance that's having its defaults set.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcSettingDefaultsEventArgs.Type">
+            <summary>
+            Gets or sets the <see cref="T:Orion.Npcs.NpcType"/> that the <see cref="T:Orion.Npcs.INpc"/> instance is having its defaults set to.
+            </summary>
+        </member>
+        <member name="M:Orion.Npcs.Events.NpcSettingDefaultsEventArgs.#ctor(Orion.Npcs.INpc,Orion.Npcs.NpcType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Npcs.Events.NpcSettingDefaultsEventArgs"/> class.
+            </summary>
+            <param name="npc">The <see cref="T:Orion.Npcs.INpc"/> instance that's having its defaults set.</param>
+            <param name="type">The <see cref="T:Orion.Npcs.NpcType"/> that the <see cref="T:Orion.Npcs.INpc"/> instance is having its defaults set to.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="npc"/> is null.</exception>
+        </member>
+        <member name="T:Orion.Npcs.Events.NpcSpawnedEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.Npcs.INpcService.NpcSpawned"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcSpawnedEventArgs.Npc">
+            <summary>
+            Gets the NPC that spawned.
+            </summary>
+        </member>
+        <member name="M:Orion.Npcs.Events.NpcSpawnedEventArgs.#ctor(Orion.Npcs.INpc)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Npcs.Events.NpcSpawnedEventArgs"/> class.
+            </summary>
+            <param name="npc">The NPC that spawned.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="npc"/> is null.</exception>
+        </member>
+        <member name="T:Orion.Npcs.Events.NpcSpawningEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.Npcs.INpcService.NpcSpawning"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcSpawningEventArgs.Index">
+            <summary>
+            Gets or sets the position of the NPC that is spawning in the NPC array.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcSpawningEventArgs.Type">
+            <summary>
+            Gets or sets the type of the NPC that is spawning.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcSpawningEventArgs.Npc">
+            <summary>
+            Gets the NPC that is spawning.
+            </summary>
+        </member>
+        <member name="M:Orion.Npcs.Events.NpcSpawningEventArgs.#ctor(Orion.Npcs.INpc,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Npcs.Events.NpcSpawningEventArgs"/> class.
+            </summary>
+            <param name="npc">The NPC that is spawning.</param>
+            <param name="index">
+            The position of the NPC that is spawning in the NPC array.
+            </param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="npc"/> is null.</exception>
+        </member>
+        <member name="T:Orion.Npcs.Events.NpcStrikingEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.Npcs.INpcService.NpcStriking"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcStrikingEventArgs.Npc">
+            <summary>
+            Gets or sets the <see cref="T:Orion.Npcs.INpc"/> instance that was hit.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcStrikingEventArgs.Damage">
+            <summary>
+            Gets or sets the hit damage.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcStrikingEventArgs.Knockback">
+            <summary>
+            Gets or sets the hit knockback.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcStrikingEventArgs.HitDirection">
+            <summary>
+            Gets or sets the hit direction.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcStrikingEventArgs.Critical">
+            <summary>
+            Whether the hit was critical.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcStrikingEventArgs.NoEffect">
+            <summary>
+            Whether to display the hit effect. 
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcStrikingEventArgs.FromNet">
+            <summary>
+            Whether the hit was caused by a bug net.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcStrikingEventArgs.Entity">
+            <summary>
+            Gets or sets the <see cref="T:Orion.Entities.IOrionEntity"/> that struck the NPC. May be null.
+            </summary>
+        </member>
+        <member name="M:Orion.Npcs.Events.NpcStrikingEventArgs.#ctor(Orion.Npcs.INpc,System.Int32,System.Single,System.Int32,System.Boolean,System.Boolean,System.Boolean,Orion.Entities.IOrionEntity)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Npcs.Events.NpcStrikingEventArgs"/> class.
+            </summary>
+            <param name="npc">The <see cref="T:Orion.Npcs.INpc"/> instance that was hit.</param>
+            <param name="damage">The hit damage.</param>
+            <param name="knockback">The hit knockback.</param>
+            <param name="hitDirection">The hit direction.</param>
+            <param name="critical">Whether the hit was critical.</param>
+            <param name="noEffect">Whether to display the hit effect.</param>
+            <param name="fromNet">Whether the hit was caused by a bug net.</param>
+            <param name="entity">The <see cref="T:Orion.Entities.IOrionEntity"/>that struck the NPC. May be null.</param>
+        </member>
+        <member name="T:Orion.Npcs.Events.NpcTransformedEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.Npcs.INpcService.NpcTransformed"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcTransformedEventArgs.Npc">
+            <summary>
+            Gets the NPC that transformed.
+            </summary>
+        </member>
+        <member name="M:Orion.Npcs.Events.NpcTransformedEventArgs.#ctor(Orion.Npcs.INpc)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Npcs.Events.NpcTransformedEventArgs"/> class.
+            </summary>
+            <param name="npc">The NPC that transformed.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="npc"/> is null.</exception>
+        </member>
+        <member name="T:Orion.Npcs.Events.NpcTransformingEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.Npcs.INpcService.NpcTransforming"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcTransformingEventArgs.Npc">
+            <summary>
+            Gets the <see cref="T:Orion.Npcs.INpc"/> instance that's transforming.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Events.NpcTransformingEventArgs.Type">
+            <summary>
+            Gets or sets the <see cref="T:Orion.Npcs.NpcType"/> that the <see cref="T:Orion.Npcs.INpc"/> instance is transforming to.
+            </summary>
+        </member>
+        <member name="M:Orion.Npcs.Events.NpcTransformingEventArgs.#ctor(Orion.Npcs.INpc,Orion.Npcs.NpcType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Npcs.Events.NpcTransformingEventArgs"/> class.
+            </summary>
+            <param name="npc">The <see cref="T:Orion.Npcs.INpc"/> instance that's transforming.</param>
+            <param name="type">The <see cref="T:Orion.Npcs.NpcType"/> that the <see cref="T:Orion.Npcs.INpc"/> instance is transforming to.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="npc"/> is null.</exception>
+        </member>
+        <member name="T:Orion.Npcs.INpc">
+            <summary>
+            Provides a wrapper around a Terraria NPC instance.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.INpc.Damage">
+            <summary>
+            Gets or sets the NPC's damage.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.INpc.Defense">
+            <summary>
+            Gets or sets the NPC's defense.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.INpc.Health">
+            <summary>
+            Gets or sets the NPC's health.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.INpc.IsBoss">
+            <summary>
+            Gets or sets a value indicating whether the NPC is a boss.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.INpc.MaxHealth">
+            <summary>
+            Gets or sets the NPC's maximum health.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.INpc.Type">
+            <summary>
+            Gets the NPC's <see cref="T:Orion.Npcs.NpcType"/>.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.INpc.WrappedNpc">
+            <summary>
+            Gets the wrapped Terraria NPC instance.
+            </summary>
+        </member>
+        <member name="M:Orion.Npcs.INpc.SetDefaults(Orion.Npcs.NpcType)">
+            <summary>
+            Sets the NPC's defaults using the specified <see cref="T:Orion.Npcs.NpcType"/>.
+            </summary>
+            <param name="type">The <see cref="T:Orion.Npcs.NpcType"/>.</param>
+        </member>
+        <member name="T:Orion.Npcs.INpcService">
+            <summary>
+            Provides a mechanism for managing NPCs.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.INpcService.BaseNpcSpawningLimit">
+            <summary>
+            Gets or sets the base NPC spawning limit.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.INpcService.BaseNpcSpawningRate">
+            <summary>
+            Gets or sets the base NPC spawning rate.
+            </summary>
+        </member>
+        <member name="E:Orion.Npcs.INpcService.NpcDroppedLoot">
+            <summary>
+            Occurs after an NPC has dropped loot.
+            </summary>
+        </member>
+        <member name="E:Orion.Npcs.INpcService.NpcDroppingLoot">
+            <summary>
+            Occurs when an NPC is dropping loot.
+            </summary>
+        </member>
+        <member name="E:Orion.Npcs.INpcService.NpcKilled">
+            <summary>
+            Occurs after an NPC was killed.
+            </summary>
+        </member>
+        <member name="E:Orion.Npcs.INpcService.NpcSetDefaults">
+            <summary>
+            Occurs after an <see cref="T:Orion.Npcs.INpc"/> instance had its defaults set.
+            </summary>
+        </member>
+        <member name="E:Orion.Npcs.INpcService.NpcSettingDefaults">
+            <summary>
+            Occurs when an <see cref="T:Orion.Npcs.INpc"/> instance is having its defaults set.
+            </summary>
+        </member>
+        <member name="E:Orion.Npcs.INpcService.NpcSpawned">
+            <summary>
+            Occurs when an <see cref="T:Orion.Npcs.INpc"/> instance is about to be spawned in the world.
+            </summary>
+        </member>
+        <member name="E:Orion.Npcs.INpcService.NpcSpawning">
+            <summary>
+            Occurs when an NPC is spawning in the world.
+            </summary>
+        </member>
+        <member name="E:Orion.Npcs.INpcService.NpcStriking">
+            <summary>
+            Occurs when an <see cref="T:Orion.Npcs.INpc"/> instance has been hit.
+            </summary>
+        </member>
+        <member name="E:Orion.Npcs.INpcService.NpcTransformed">
+            <summary>
+            Occurs after an <see cref="T:Orion.Npcs.INpc"/> instance has transformed to another type.
+            </summary>
+        </member>
+        <member name="E:Orion.Npcs.INpcService.NpcTransforming">
+            <summary>
+            Occurs when an NPC is transforming to another type.
+            </summary>
+        </member>
+        <member name="M:Orion.Npcs.INpcService.FindNpcs(System.Predicate{Orion.Npcs.INpc})">
+            <summary>
+            Returns all <see cref="T:Orion.Npcs.INpc"/> instances in the world, optionally matching a predicate.
+            </summary>
+            <param name="predicate">The predicate.</param>
+            <returns>An enumerable collection of NPCs.</returns>
+        </member>
+        <member name="M:Orion.Npcs.INpcService.SpawnNpc(System.Int32,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Spawns a new NPC with the specified type ID at a position in the world.
+            </summary>
+            <param name="type">The <see cref="T:Orion.Npcs.NpcType"/>.</param>
+            <param name="position">The position in the world.</param>
+            <returns>The resulting NPC.</returns>
+        </member>
+        <member name="T:Orion.Npcs.Npc">
+            <summary>
+            Wraps a Terraria NPC instance.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.Npc.Damage">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Npcs.Npc.Defense">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Npcs.Npc.Health">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Npcs.Npc.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Npcs.Npc.IsBoss">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Npcs.Npc.MaxHealth">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Npcs.Npc.Name">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Npcs.Npc.Position">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Npcs.Npc.Type">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Npcs.Npc.Velocity">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Npcs.Npc.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Npcs.Npc.WrappedNpc">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Npcs.Npc.WrappedEntity">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Npcs.Npc.#ctor(Terraria.NPC)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Npcs.Npc"/> class wrapping the specified Terraria NPC instance.
+            </summary>
+            <param name="terrariaNpc">The Terraria NPC instance to wrap.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="terrariaNpc"/> is null.</exception>
+        </member>
+        <member name="M:Orion.Npcs.Npc.Kill">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Npcs.Npc.SetDefaults(Orion.Npcs.NpcType)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Orion.Npcs.NpcService">
+            <summary>
+            Manages <see cref="T:Orion.Npcs.INpc"/> instances.
+            </summary>
+        </member>
+        <member name="P:Orion.Npcs.NpcService.BaseNpcSpawningLimit">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Npcs.NpcService.BaseNpcSpawningRate">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.Npcs.NpcService.NpcDroppedLoot">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.Npcs.NpcService.NpcDroppingLoot">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.Npcs.NpcService.NpcKilled">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.Npcs.NpcService.NpcSetDefaults">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.Npcs.NpcService.NpcSettingDefaults">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.Npcs.NpcService.NpcSpawned">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.Npcs.NpcService.NpcSpawning">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.Npcs.NpcService.NpcStriking">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.Npcs.NpcService.NpcTransformed">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.Npcs.NpcService.NpcTransforming">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Npcs.NpcService.#ctor(Orion.Orion,Orion.Items.ItemService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Npcs.NpcService"/> class.
+            </summary>
+            <param name="orion">The parent <see cref="T:Orion.Orion"/> instance.</param>
+            <param name="itemService">The <see cref="T:Orion.Items.ItemService"/> instance.</param>
+        </member>
+        <member name="M:Orion.Npcs.NpcService.SpawnNpc(System.Int32,Microsoft.Xna.Framework.Vector2)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Npcs.NpcService.FindNpcs(System.Predicate{Orion.Npcs.INpc})">
+            <inheritdoc/>
+            <remarks>
+            The <see cref="T:Orion.Npcs.INpc"/> instances are cached in an array. Calling this method multiple times will result
+            in the same <see cref="T:Orion.Npcs.INpc"/> instances as long as Terraria's npc array remains unchanged.
+            </remarks>
+        </member>
+        <member name="T:Orion.Npcs.NpcType">
+            <summary>
+            Specifies an NPC's type.
+            </summary>
+        </member>
+        <member name="T:Orion.Orion">
+            <summary>
+            Handles Orion's dependency injection.
+            </summary>
+        </member>
+        <member name="P:Orion.Orion.PluginDirectory">
+            <summary>
+            Gets the plugin directory.
+            </summary>
+        </member>
+        <member name="M:Orion.Orion.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Orion"/> class.
+            </summary>
+        </member>
+        <member name="M:Orion.Orion.Dispose">
+            <summary>
+            Disposes the dependency injection kernel. This will dispose all shared services and plugins.
+            </summary>
+        </member>
+        <member name="M:Orion.Orion.GetService``1">
+            <summary>
+            Gets an Orion service by the type specified.
+            </summary>
+            <typeparam name="TService">
+            TService is the type of any Orion service
+            </typeparam>
+            <returns>
+            The <typeparamref name="TService"/> requested, or null if it cannot be found.
+            </returns>
+        </member>
+        <member name="M:Orion.Orion.GetServices``1">
+            <summary>
+            Gets a list of all Orion services by the type specified.
+            </summary>
+            <typeparam name="TService">
+            TService is the type of any Orion service
+            </typeparam>
+            <returns>
+            The <typeparamref name="TService"/> requested, or null if it cannot be found.
+            </returns>
+        </member>
+        <member name="M:Orion.Orion.Start(System.String[])">
+            <summary>
+            Starts the server or client. This will initialize all shared services and plugins.
+            </summary>
+            <param name="args">The command-line arguments to use.</param>
+        </member>
+        <member name="T:Orion.Players.Events.PlayerJoinedEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.Players.IPlayerService.PlayerJoined"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.Events.PlayerJoinedEventArgs.Player">
+            <summary>
+            Gets the player that joined the game.
+            </summary>
+        </member>
+        <member name="M:Orion.Players.Events.PlayerJoinedEventArgs.#ctor(Orion.Players.IPlayer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Players.Events.PlayerJoinedEventArgs"/> class.
+            </summary>
+            <param name="player">The player that joined the game.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="player"/> is null.</exception>
+        </member>
+        <member name="T:Orion.Players.Events.PlayerJoiningEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.Players.IPlayerService.PlayerJoining"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.Events.PlayerJoiningEventArgs.Player">
+            <summary>
+            Gets the player that is joining the game.
+            </summary>
+        </member>
+        <member name="M:Orion.Players.Events.PlayerJoiningEventArgs.#ctor(Orion.Players.IPlayer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Players.Events.PlayerJoiningEventArgs"/> class.
+            </summary>
+            <param name="player">The player that is joining the game.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="player"/> is null.</exception>
+        </member>
+        <member name="T:Orion.Players.Events.PlayerQuitEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.Players.IPlayerService.PlayerQuit"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.Events.PlayerQuitEventArgs.Player">
+            <summary>
+            Gets the player that quit the game.
+            </summary>
+        </member>
+        <member name="M:Orion.Players.Events.PlayerQuitEventArgs.#ctor(Orion.Players.IPlayer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Players.Events.PlayerQuitEventArgs"/> class.
+            </summary>
+            <param name="player">The player that quit the game.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="player"/> is null.</exception>
+        </member>
+        <member name="T:Orion.Players.IPlayer">
+            <summary>
+            Provides a wrapper around a Terraria player instance.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.Defense">
+            <summary>
+            Gets or sets the player's defense.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.Dyes">
+            <summary>
+            Gets the player's dyes.
+            </summary>
+            <remarks>
+            This array corresponds to the <see cref="P:Orion.Players.IPlayer.Equips"/> array.
+            </remarks>
+        </member>
+        <member name="P:Orion.Players.IPlayer.Equips">
+            <summary>
+            Gets the player's equips.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.HasPvpEnabled">
+            <summary>
+            Gets or sets a value indicating whether the player has PvP enabled.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.Health">
+            <summary>
+            Gets or sets the player's health.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.IsDead">
+            <summary>
+            Gets or sets a value indicating whether the player is dead.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.Inventory">
+            <summary>
+            Gets the player's inventory.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.MagicCritBonus">
+            <summary>
+            Gets or sets the player's magic crit bonus.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.MagicDamageMultiplier">
+            <summary>
+            Gets or sets the player's magic damage multiplier.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.Mana">
+            <summary>
+            Gets or sets the player's mana.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.ManaCostMultiplier">
+            <summary>
+            Gets or sets the player's mana cost multiplier.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.MaxHealth">
+            <summary>
+            Gets or sets the player's maximum health.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.MaxMana">
+            <summary>
+            Gets or sets the player's maximum mana.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.MaxMinions">
+            <summary>
+            Gets or sets the player's maximum number of minions.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.MeleeCritBonus">
+            <summary>
+            Gets or sets the player's melee crit bonus.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.MeleeDamageMultiplier">
+            <summary>
+            Gets or sets the player's melee damage multiplier.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.MinionDamageMultiplier">
+            <summary>
+            Gets or sets the player's minion damage multiplier.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.MiscDyes">
+            <summary>
+            Gets the player's miscellaneous dyes.
+            </summary>
+            <remarks>
+            This array corresponds to the <see cref="P:Orion.Players.IPlayer.MiscEquips"/> array.
+            </remarks>
+        </member>
+        <member name="P:Orion.Players.IPlayer.MiscEquips">
+            <summary>
+            Gets the player's miscellaneous equips.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.MovementSpeed">
+            <summary>
+            Gets or sets the player's movement speed.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.PiggyBank">
+            <summary>
+            Gets the player's piggy bank.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.RangedCritBonus">
+            <summary>
+            Gets or sets the player's ranged crit bonus.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.RangedDamageMultiplier">
+            <summary>
+            Gets or sets the player's ranged damage multiplier.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.Safe">
+            <summary>
+            Gets the player's safe.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.SelectedItem">
+            <summary>
+            Gets the player's selected item.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.Team">
+            <summary>
+            Gets or sets the player's team.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.ThrownCritBonus">
+            <summary>
+            Gets or sets the player's thrown crit bonus.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.ThrownDamageMultiplier">
+            <summary>
+            Gets or sets the player's thrown damage multiplier.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.TrashItem">
+            <summary>
+            Gets or sets the player's trash item.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.IPlayer.WrappedPlayer">
+            <summary>
+            Gets the wrapped Terraria player instance.
+            </summary>
+        </member>
+        <member name="T:Orion.Players.IPlayerService">
+            <summary>
+            Provides a mechanism for managing players.
+            </summary>
+        </member>
+        <member name="E:Orion.Players.IPlayerService.PlayerJoined">
+            <summary>
+            Occurs after a player has joined the game.
+            </summary>
+        </member>
+        <member name="E:Orion.Players.IPlayerService.PlayerJoining">
+            <summary>
+            Occurs when a player is joining the game.
+            </summary>
+        </member>
+        <member name="E:Orion.Players.IPlayerService.PlayerQuit">
+            <summary>
+            Occurs after a player has quit the game.
+            </summary>
+        </member>
+        <member name="M:Orion.Players.IPlayerService.FindPlayers(System.Predicate{Orion.Players.IPlayer})">
+            <summary>
+            Returns all players in the world, optionally matching a predicate.
+            </summary>
+            <param name="predicate">The predicate.</param>
+            <returns>An enumerable collection of players.</returns>
+        </member>
+        <member name="T:Orion.Players.Player">
+            <summary>
+            Wraps a Terraria player instance.
+            </summary>
+        </member>
+        <member name="P:Orion.Players.Player.Defense">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.Dyes">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.Equips">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.HasPvpEnabled">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.Health">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.IsDead">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.Inventory">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.MagicCritBonus">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.MagicDamageMultiplier">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.Mana">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.ManaCostMultiplier">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.MaxHealth">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.MaxMana">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.MaxMinions">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.MeleeCritBonus">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.MeleeDamageMultiplier">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.MinionDamageMultiplier">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.MiscDyes">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.MiscEquips">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.MovementSpeed">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.Name">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.PiggyBank">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.Position">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.RangedCritBonus">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.RangedDamageMultiplier">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.Safe">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.SelectedItem">
+            <inheritdoc/>
+            <remarks>
+            The <see cref="T:Orion.Items.IItem"/> instance is cached. Calling this getter multiple times will return the same
+            <see cref="T:Orion.Items.IItem"/> instance as long as the player's selected item remains unchanged.
+            </remarks>
+        </member>
+        <member name="P:Orion.Players.Player.Team">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.ThrownCritBonus">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.ThrownDamageMultiplier">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.TrashItem">
+            <inheritdoc/>
+            <remarks>
+            The <see cref="T:Orion.Items.IItem"/> instance is cached. Calling this getter multiple times will return the same
+            <see cref="T:Orion.Items.IItem"/> instance as long as the player's trash item remains unchanged.
+            </remarks>
+        </member>
+        <member name="P:Orion.Players.Player.Velocity">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.WrappedPlayer">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Players.Player.WrappedEntity">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Players.Player.#ctor(Terraria.Player)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Players.Player"/> class wrapping the specified Terraria player
+            instance.
+            </summary>
+            <param name="terrariaPlayer">The Terraria player instance to wrap.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="terrariaPlayer"/> is null.</exception>
+        </member>
+        <member name="M:Orion.Players.Player.Kill">
+            <inheritdoc/>
+        </member>
+        <member name="T:Orion.Players.PlayerService">
+            <summary>
+            Manages players.
+            </summary>
+        </member>
+        <member name="E:Orion.Players.PlayerService.PlayerJoined">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.Players.PlayerService.PlayerJoining">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.Players.PlayerService.PlayerQuit">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Players.PlayerService.#ctor(Orion.Orion)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Players.PlayerService"/> class.
+            </summary>
+            <param name="orion">The parent <see cref="T:Orion.Orion"/> instance.</param>
+        </member>
+        <member name="M:Orion.Players.PlayerService.FindPlayers(System.Predicate{Orion.Players.IPlayer})">
+            <inheritdoc/>
+            <remarks>
+            The players are cached in an array. Calling this method multiple times will result in the same instances as
+            long as Terraria's player array remains unchanged.
+            </remarks>
+        </member>
+        <member name="T:Orion.Players.Team">
+            <summary>
+            Specifies a player's team.
+            </summary>
+        </member>
+        <member name="T:Orion.Projectiles.Events.ProjectileUpdatedAIEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.Projectiles.IProjectileService.ProjectileUpdatedAI"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Projectiles.Events.ProjectileUpdatedAIEventArgs.Projectile">
+            <summary>
+            Gets the projectile for which the AI was updated.
+            </summary>
+        </member>
+        <member name="M:Orion.Projectiles.Events.ProjectileUpdatedAIEventArgs.#ctor(Orion.Projectiles.IProjectile)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Projectiles.Events.ProjectileUpdatedAIEventArgs"/> class. 
+            </summary>
+            <param name="projectile">The projectile for which the AI was updated.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="projectile"/> is null.</exception>
+        </member>
+        <member name="T:Orion.Projectiles.Events.ProjectileUpdatedEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.Projectiles.IProjectileService.ProjectileUpdated"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Projectiles.Events.ProjectileUpdatedEventArgs.Projectile">
+            <summary>
+            Gets the projectile that was updated.
+            </summary>
+        </member>
+        <member name="M:Orion.Projectiles.Events.ProjectileUpdatedEventArgs.#ctor(Orion.Projectiles.IProjectile)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Projectiles.Events.ProjectileUpdatedEventArgs"/> class. 
+            </summary>
+            <param name="projectile">The projectile that was updated.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="projectile"/> is null.</exception>
+        </member>
+        <member name="T:Orion.Projectiles.Events.ProjectileUpdatingAIEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.Projectiles.IProjectileService.ProjectileUpdatingAI"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Projectiles.Events.ProjectileUpdatingAIEventArgs.Projectile">
+            <summary>
+            Gets the projectile for which the AI is being updated.
+            </summary>
+        </member>
+        <member name="M:Orion.Projectiles.Events.ProjectileUpdatingAIEventArgs.#ctor(Orion.Projectiles.IProjectile)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Projectiles.Events.ProjectileUpdatingAIEventArgs"/> class. 
+            </summary>
+            <param name="projectile">The projectile for which the AI is being updated.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="projectile"/> is null.</exception>
+        </member>
+        <member name="T:Orion.Projectiles.Events.ProjectileUpdatingEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.Projectiles.IProjectileService.ProjectileUpdating"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Projectiles.Events.ProjectileUpdatingEventArgs.Projectile">
+            <summary>
+            Gets the projectile that is being updated.
+            </summary>
+        </member>
+        <member name="M:Orion.Projectiles.Events.ProjectileUpdatingEventArgs.#ctor(Orion.Projectiles.IProjectile)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Projectiles.Events.ProjectileUpdatingEventArgs"/> class. 
+            </summary>
+            <param name="projectile">The projectile that is being updated.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="projectile"/> is null.</exception>
+        </member>
+        <member name="T:Orion.Projectiles.Events.ProjectileKillingEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.Projectiles.IProjectileService.ProjectileKilling"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Projectiles.Events.ProjectileKillingEventArgs.Projectile">
+            <summary>
+            Gets the projectile that is being killed.
+            </summary>
+        </member>
+        <member name="M:Orion.Projectiles.Events.ProjectileKillingEventArgs.#ctor(Orion.Projectiles.IProjectile)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Projectiles.Events.ProjectileKillingEventArgs"/> class. 
+            </summary>
+            <param name="projectile">The projectile that is being killed.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="projectile"/> is null.</exception>
+        </member>
+        <member name="T:Orion.Projectiles.Events.ProjectileKilledEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.Projectiles.IProjectileService.ProjectileKilled"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Projectiles.Events.ProjectileKilledEventArgs.Projectile">
+            <summary>
+            Gets the projectile that was killed.
+            </summary>
+        </member>
+        <member name="M:Orion.Projectiles.Events.ProjectileKilledEventArgs.#ctor(Orion.Projectiles.IProjectile)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Projectiles.Events.ProjectileKilledEventArgs"/> class. 
+            </summary>
+            <param name="projectile">The projectile that was killed.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="projectile"/> is null.</exception>
+        </member>
+        <member name="T:Orion.Projectiles.Events.ProjectileSetDefaultsEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.Projectiles.IProjectileService.ProjectileSetDefaults"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Projectiles.Events.ProjectileSetDefaultsEventArgs.Projectile">
+            <summary>
+            Gets the projectile that had its defaults set.
+            </summary>
+        </member>
+        <member name="M:Orion.Projectiles.Events.ProjectileSetDefaultsEventArgs.#ctor(Orion.Projectiles.IProjectile)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Projectiles.Events.ProjectileSetDefaultsEventArgs"/> class. 
+            </summary>
+            <param name="projectile">The projectile that had its defaults set.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="projectile"/> is null.</exception>
+        </member>
+        <member name="T:Orion.Projectiles.Events.ProjectileSettingDefaultsEventArgs">
+            <summary>
+            Provides data for the see <see cref="E:Orion.Projectiles.IProjectileService.ProjectileSettingDefaults"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.Projectiles.Events.ProjectileSettingDefaultsEventArgs.Projectile">
+            <summary>
+            Gets the projectile that is having its defaults set.
+            </summary>
+        </member>
+        <member name="P:Orion.Projectiles.Events.ProjectileSettingDefaultsEventArgs.Type">
+            <summary>
+            Gets or sets the <see cref="T:Orion.Projectiles.ProjectileType"/> that the projectile is having its defaults set to.
+            </summary>
+        </member>
+        <member name="M:Orion.Projectiles.Events.ProjectileSettingDefaultsEventArgs.#ctor(Orion.Projectiles.IProjectile,Orion.Projectiles.ProjectileType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Projectiles.Events.ProjectileSettingDefaultsEventArgs"/> class.
+            </summary>
+            <param name="projectile">The projectile that is having its defaults set.</param>
+            <param name="type">
+            The <see cref="T:Orion.Projectiles.ProjectileType"/> that the projectile is having its defaults set to.
+            </param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="projectile"/> is null.</exception>
+        </member>
+        <member name="T:Orion.Projectiles.IProjectile">
+            <summary>
+            Provides a wrapper around a Terraria projectile instance.
+            </summary>
+        </member>
+        <member name="P:Orion.Projectiles.IProjectile.Damage">
+            <summary>
+            Gets or sets the projectile's damage.
+            </summary>
+        </member>
+        <member name="P:Orion.Projectiles.IProjectile.IsHostile">
+            <summary>
+            Gets or sets a value indicating whether the projectile is hostile.
+            </summary>
+        </member>
+        <member name="P:Orion.Projectiles.IProjectile.IsMagic">
+            <summary>
+            Gets or sets a value indicating whether the projectile is magic.
+            </summary>
+        </member>
+        <member name="P:Orion.Projectiles.IProjectile.IsMelee">
+            <summary>
+            Gets or sets a value indicating whether the projectile is melee.
+            </summary>
+        </member>
+        <member name="P:Orion.Projectiles.IProjectile.IsMinion">
+            <summary>
+            Gets or sets a value indicating whether the projectile is a minion.
+            </summary>
+        </member>
+        <member name="P:Orion.Projectiles.IProjectile.IsRanged">
+            <summary>
+            Gets or sets a value indicating whether the projectile is ranged.
+            </summary>
+        </member>
+        <member name="P:Orion.Projectiles.IProjectile.IsThrown">
+            <summary>
+            Gets or sets a value indicating whether the projectile is thrown.
+            </summary>
+        </member>
+        <member name="P:Orion.Projectiles.IProjectile.Type">
+            <summary>
+            Gets the projectile's <see cref="T:Orion.Projectiles.ProjectileType"/>.
+            </summary>
+        </member>
+        <member name="P:Orion.Projectiles.IProjectile.WrappedProjectile">
+            <summary>
+            Gets the wrapped Terraria projectile instance.
+            </summary>
+        </member>
+        <member name="M:Orion.Projectiles.IProjectile.SetDefaults(Orion.Projectiles.ProjectileType)">
+            <summary>
+            Sets the projectile's defaults using the specified <see cref="T:Orion.Projectiles.ProjectileType"/>.
+            </summary>
+            <param name="type">The <see cref="T:Orion.Projectiles.ProjectileType"/>.</param>
+        </member>
+        <member name="T:Orion.Projectiles.IProjectileService">
+            <summary>
+            Provides a mechanism for managing projectiles.
+            </summary>
+        </member>
+        <member name="E:Orion.Projectiles.IProjectileService.ProjectileKilled">
+            <summary>
+            Occurs after a projectile was killed.
+            </summary>
+        </member>
+        <member name="E:Orion.Projectiles.IProjectileService.ProjectileKilling">
+            <summary>
+            Occurs when a projectile is being killed.
+            </summary>
+        </member>
+        <member name="E:Orion.Projectiles.IProjectileService.ProjectileSetDefaults">
+            <summary>
+            Occurs after a projectile has had its defaults set.
+            </summary>
+        </member>
+        <member name="E:Orion.Projectiles.IProjectileService.ProjectileSettingDefaults">
+            <summary>
+            Occurs when a projectile is having its defaults set.
+            </summary>
+        </member>
+        <member name="E:Orion.Projectiles.IProjectileService.ProjectileUpdated">
+            <summary>
+            Occurs after a projectile was updated.
+            </summary>
+        </member>
+        <member name="E:Orion.Projectiles.IProjectileService.ProjectileUpdatedAI">
+            <summary>
+            Occurs after a projectile's AI was updated.
+            </summary>
+        </member>
+        <member name="E:Orion.Projectiles.IProjectileService.ProjectileUpdating">
+            <summary>
+            Occurs when a projectile is being updated.
+            </summary>
+        </member>
+        <member name="E:Orion.Projectiles.IProjectileService.ProjectileUpdatingAI">
+            <summary>
+            Occurs when a projectile's AI is being updated.
+            </summary>
+        </member>
+        <member name="M:Orion.Projectiles.IProjectileService.FindProjectiles(System.Predicate{Orion.Projectiles.IProjectile})">
+            <summary>
+            Returns all projectiles in the world, optionally matching a predicate.
+            </summary>
+            <param name="predicate">The predicate.</param>
+            <returns>An enumerable collection of projectiles.</returns>
+        </member>
+        <member name="T:Orion.Projectiles.Projectile">
+            <summary>
+            Wraps a Terraria projectile instance.
+            </summary>
+        </member>
+        <member name="P:Orion.Projectiles.Projectile.Damage">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Projectiles.Projectile.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Projectiles.Projectile.IsHostile">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Projectiles.Projectile.IsMagic">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Projectiles.Projectile.IsMelee">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Projectiles.Projectile.IsMinion">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Projectiles.Projectile.IsRanged">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Projectiles.Projectile.IsThrown">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Projectiles.Projectile.Name">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Projectiles.Projectile.Position">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Projectiles.Projectile.Type">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Projectiles.Projectile.Velocity">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Projectiles.Projectile.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Projectiles.Projectile.WrappedProjectile">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.Projectiles.Projectile.WrappedEntity">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Projectiles.Projectile.#ctor(Terraria.Projectile)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Projectiles.Projectile"/> class wrapping the specified Terraria projectile
+            instance.
+            </summary>
+            <param name="terrariaProjectile">The Terraria projectile to wrap.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="terrariaProjectile"/> is null.</exception>
+        </member>
+        <member name="M:Orion.Projectiles.Projectile.Kill">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Projectiles.Projectile.SetDefaults(Orion.Projectiles.ProjectileType)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Orion.Projectiles.ProjectileService">
+            <summary>
+            Manages projectiles;
+            </summary>
+        </member>
+        <member name="E:Orion.Projectiles.ProjectileService.ProjectileKilled">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.Projectiles.ProjectileService.ProjectileKilling">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.Projectiles.ProjectileService.ProjectileSetDefaults">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.Projectiles.ProjectileService.ProjectileSettingDefaults">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.Projectiles.ProjectileService.ProjectileUpdated">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.Projectiles.ProjectileService.ProjectileUpdatedAI">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.Projectiles.ProjectileService.ProjectileUpdating">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.Projectiles.ProjectileService.ProjectileUpdatingAI">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Projectiles.ProjectileService.#ctor(Orion.Orion)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Projectiles.ProjectileService"/> class.
+            </summary>
+            <param name="orion">The parent <see cref="T:Orion.Orion"/> instance.</param>
+        </member>
+        <member name="M:Orion.Projectiles.ProjectileService.FindProjectiles(System.Predicate{Orion.Projectiles.IProjectile})">
+            <inheritdoc/>
+            <remarks>
+            The projectiles are cached in an array. Calling this method multiple times will result in the same
+            instances as long as Terraria's projectile array remains unchanged.
+            </remarks>
+        </member>
+        <member name="T:Orion.Projectiles.ProjectileType">
+            <summary>
+            Specifies a projectile's type.
+            </summary>
+        </member>
+        <member name="T:Orion.Rest.IRestService">
+            <summary>
+            Provides access to a REST service implementation
+            </summary>
+        </member>
+        <member name="P:Orion.Rest.IRestService.BaseAddress">
+            <summary>
+            Gets the desired binding address the REST implementation will be using
+            </summary>
+        </member>
+        <member name="M:Orion.Rest.IRestService.Startup">
+            <summary>
+            Starts the initialization process of the REST service
+            </summary>
+        </member>
+        <member name="M:Orion.Rest.IRestService.Shutdown">
+            <summary>
+            Shuts down the REST service
+            </summary>
+        </member>
+        <member name="T:Orion.Rest.Owin.OwinConfiguration">
+            <summary>
+            OWIN specific configuration for use with the <see cref="T:Orion.Rest.Owin.OwinRestService"/>
+            </summary>
+        </member>
+        <member name="P:Orion.Rest.Owin.OwinConfiguration.AutoStart">
+            <summary>
+            Defines weather the <see cref="T:Orion.Rest.Owin.OwinRestService"/> is allowed to auto start
+            </summary>
+        </member>
+        <member name="P:Orion.Rest.Owin.OwinConfiguration.BaseAddress">
+            <summary>
+            Base address for the REST service to listen on
+            </summary>
+        </member>
+        <member name="T:Orion.Rest.Owin.OwinNinjectDependencyResolver">
+            <summary>
+            Implements a <see cref="T:System.Web.Http.Dependencies.IDependencyResolver"/> so that the <see cref="T:Orion.Rest.Owin.OwinRestService"/>
+            uses Ninject as it's dependency resolver.
+            </summary>
+        </member>
+        <member name="M:Orion.Rest.Owin.OwinNinjectDependencyResolver.#ctor(Ninject.IKernel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Rest.Owin.OwinNinjectDependencyResolver"/> class
+            </summary>
+            <param name="kernel">The master Ninject kernel instance</param>
+        </member>
+        <member name="M:Orion.Rest.Owin.OwinNinjectDependencyResolver.BeginScope">
+            <summary>
+            Returns the current resolution scope
+            </summary>
+            <returns>The dependency scope</returns>
+        </member>
+        <member name="M:Orion.Rest.Owin.OwinNinjectDependencyResolver.GetService(System.Type)">
+            <inheritdoc />
+            <exception cref="T:System.ObjectDisposedException"/>
+        </member>
+        <member name="M:Orion.Rest.Owin.OwinNinjectDependencyResolver.GetServices(System.Type)">
+            <inheritdoc />
+            <exception cref="T:System.ObjectDisposedException"/>
+        </member>
+        <member name="M:Orion.Rest.Owin.OwinNinjectDependencyResolver.Dispose">
+            <summary>
+            Disposes of the current instance
+            </summary>
+        </member>
+        <member name="T:Orion.Rest.Owin.OwinRestService">
+            <summary>
+            Implements a <see cref="T:Orion.Rest.IRestService"/> using an implementation of the OWIN self hosted framework.
+            </summary>
+        </member>
+        <member name="P:Orion.Rest.Owin.OwinRestService.Configuration">
+            <summary>
+            Provides access to the configuration used for the OWIN service.
+            </summary>
+        </member>
+        <member name="P:Orion.Rest.Owin.OwinRestService.BaseAddress">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Rest.Owin.OwinRestService.#ctor(Orion.Orion,Orion.Configuration.JsonFileConfigurationService{Orion.Rest.Owin.OwinConfiguration},Ninject.IKernel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.Rest.Owin.OwinRestService"/> class
+            </summary>
+            <param name="orion">The parent <see cref="T:Orion.Orion"/> instance</param>
+            <param name="configuration">
+            The configuration service instance to provide access to <see cref="T:Orion.Rest.Owin.OwinConfiguration"/>
+            </param>
+            <param name="kernel">
+            The master injection container kernel that is shared with the <see cref="T:Orion.Orion"/> instance
+            </param>
+        </member>
+        <member name="M:Orion.Rest.Owin.OwinRestService.Startup">
+            <inheritdoc/>
+            <exception cref="T:System.ObjectDisposedException"/>
+            <exception cref="T:System.InvalidOperationException"/>
+        </member>
+        <member name="M:Orion.Rest.Owin.OwinRestService.Shutdown">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.Rest.Owin.OwinRestService.Startup(Owin.IAppBuilder)">
+            <summary>
+            Occurs when OWIN requests the service to configure the HTTP service.
+            </summary>
+            <param name="appBuilder">The <see cref="T:Owin.IAppBuilder"/> instance for use with configuring the HTTP service</param>
+        </member>
+        <member name="M:Orion.Rest.Owin.OwinRestService.Dispose(System.Boolean)">
+            <summary>
+            Disposes the <see cref="T:Orion.Rest.Owin.OwinRestService"/> instance
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:Orion.Rest.Owin.OwinRestService.Dispose">
+            <summary>
+            Disposes of the <see cref="T:Orion.Rest.Owin.OwinRestService"/> instance
+            </summary>
+        </member>
+        <member name="T:Orion.World.Events.CheckingChristmasEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.World.IWorldService.CheckingChristmas"/> event.
+            </summary>
+        </member>
+        <member name="M:Orion.World.Events.CheckingChristmasEventArgs.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.World.Events.CheckingChristmasEventArgs"/> class.
+            </summary>
+        </member>
+        <member name="T:Orion.World.Events.CheckingHalloweenEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.World.IWorldService.CheckingHalloween"/> event.
+            </summary>
+        </member>
+        <member name="M:Orion.World.Events.CheckingHalloweenEventArgs.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.World.Events.CheckingHalloweenEventArgs"/> class.
+            </summary>
+        </member>
+        <member name="T:Orion.World.Events.HardmodeStartedEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.World.IWorldService.HardmodeStarted"/> event.
+            </summary>
+        </member>
+        <member name="M:Orion.World.Events.HardmodeStartedEventArgs.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.World.Events.HardmodeStartedEventArgs"/> class.
+            </summary>
+        </member>
+        <member name="T:Orion.World.Events.HardmodeStartingEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.World.IWorldService.HardmodeStarting"/> event.
+            </summary>
+        </member>
+        <member name="M:Orion.World.Events.HardmodeStartingEventArgs.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.World.Events.HardmodeStartingEventArgs"/> class.
+            </summary>
+        </member>
+        <member name="T:Orion.World.Events.HardmodeTileUpdatingEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.World.IWorldService.HardmodeTileUpdating"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.World.Events.HardmodeTileUpdatingEventArgs.Type">
+            <summary>
+            Gets or sets the type ID that the tile is being updated to.
+            </summary>
+        </member>
+        <member name="P:Orion.World.Events.HardmodeTileUpdatingEventArgs.X">
+            <summary>
+            Gets the x position of the tile that is updating.
+            </summary>
+        </member>
+        <member name="P:Orion.World.Events.HardmodeTileUpdatingEventArgs.Y">
+            <summary>
+            Gets the y position of the tile that is updating.
+            </summary>
+        </member>
+        <member name="M:Orion.World.Events.HardmodeTileUpdatingEventArgs.#ctor(System.Int32,System.Int32,System.UInt16)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.World.Events.HardmodeTileUpdatingEventArgs"/> class.
+            </summary>
+            <param name="x">The x position of the tile that is updating.</param>
+            <param name="y">The y position of the tile that is updating.</param>
+            <param name="type">The type ID that the tile is being updated to.</param>
+        </member>
+        <member name="T:Orion.World.Events.MeteorDroppingEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.World.IWorldService.MeteorDropping"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.World.Events.MeteorDroppingEventArgs.X">
+            <summary>
+            Gets or sets the x position that a meteor is dropping at.
+            </summary>
+        </member>
+        <member name="P:Orion.World.Events.MeteorDroppingEventArgs.Y">
+            <summary>
+            Gets or sets the y position that a meteor is dropping at.
+            </summary>
+        </member>
+        <member name="M:Orion.World.Events.MeteorDroppingEventArgs.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.World.Events.MeteorDroppingEventArgs"/> class.
+            </summary>
+            <param name="x">The x position that a meteor is dropping at.</param>
+            <param name="y">The y position that a meteor is dropping at.</param>
+        </member>
+        <member name="T:Orion.World.Events.WorldLoadedEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.World.IWorldService.WorldLoaded"/> event.
+            </summary>
+        </member>
+        <member name="M:Orion.World.Events.WorldLoadedEventArgs.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.World.Events.WorldLoadedEventArgs"/> class.
+            </summary>
+        </member>
+        <member name="T:Orion.World.Events.WorldLoadingEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.World.IWorldService.WorldLoading"/> event.
+            </summary>
+        </member>
+        <member name="M:Orion.World.Events.WorldLoadingEventArgs.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.World.Events.WorldLoadingEventArgs"/> class.
+            </summary>
+        </member>
+        <member name="T:Orion.World.Events.WorldSavedEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.World.IWorldService.WorldSaved"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.World.Events.WorldSavedEventArgs.ResetTime">
+            <summary>
+            Gets a value indicating whether to reset the time.
+            </summary>
+        </member>
+        <member name="M:Orion.World.Events.WorldSavedEventArgs.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.World.Events.WorldSavedEventArgs"/> class.
+            </summary>
+            <param name="resetTime">A value indicating whether to reset the time.</param>
+        </member>
+        <member name="T:Orion.World.Events.WorldSavingEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Orion.World.IWorldService.WorldSaving"/> event.
+            </summary>
+        </member>
+        <member name="P:Orion.World.Events.WorldSavingEventArgs.ResetTime">
+            <summary>
+            Gets or sets a value indicating whether to reset the time.
+            </summary>
+        </member>
+        <member name="M:Orion.World.Events.WorldSavingEventArgs.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.World.Events.WorldSavingEventArgs"/> class.
+            </summary>
+            <param name="resetTime">A value indicating whether to reset the time.</param>
+        </member>
+        <member name="T:Orion.World.TileService">
+            <summary>
+            Implements the <see cref="T:Orion.World.ITileService"/> functionality. Mimics vanilla behaviour by storing tiles in a 2D tile
+            array.
+            </summary>
+        </member>
+        <member name="P:Orion.World.TileService.Width">
+            <summary>
+            Defines the absolute maximum value that can be requested for the x axis
+            </summary>
+        </member>
+        <member name="P:Orion.World.TileService.Height">
+            <summary>
+            Defines the absolute maximum value that can be requested for the y axis
+            </summary>
+        </member>
+        <member name="P:Orion.World.TileService.Item(System.Int32,System.Int32)">
+            <summary>
+            Gets or sets the <see cref="T:OTAPI.Tile.ITile"/> instance at the specified position.
+            </summary>
+            <param name="x">The x position.</param>
+            <param name="y">The y position.</param>
+            <remarks>
+            The 2D tile array is lazily constructed when getting <see cref="T:OTAPI.Tile.ITile"/> instances.
+            </remarks>
+        </member>
+        <member name="M:Orion.World.TileService.#ctor(Orion.Orion)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.World.TileService"/> class.
+            </summary>
+            <param name="orion">The parent <see cref="T:Orion.Orion"/> instance.</param>
+        </member>
+        <member name="T:Orion.World.WorldService">
+            <summary>
+            Manages Terraria's world functions.
+            </summary>
+        </member>
+        <member name="E:Orion.World.WorldService.CheckingChristmas">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.World.WorldService.CheckingHalloween">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.World.WorldService.HardmodeStarted">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.World.WorldService.HardmodeStarting">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.World.WorldService.HardmodeTileUpdating">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.World.WorldService.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.World.WorldService.IsBloodMoon">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.World.WorldService.IsChristmas">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.World.WorldService.IsDaytime">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.World.WorldService.IsEclipse">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.World.WorldService.IsExpertMode">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.World.WorldService.IsFrostMoon">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.World.WorldService.IsHalloween">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.World.WorldService.IsPumpkinMoon">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.World.WorldService.MeteorDropping">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.World.WorldService.Time">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.World.WorldService.Width">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.World.WorldService.WorldLoaded">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.World.WorldService.WorldLoading">
+            <inheritdoc/>
+        </member>
+        <member name="P:Orion.World.WorldService.WorldName">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.World.WorldService.WorldSaved">
+            <inheritdoc/>
+        </member>
+        <member name="E:Orion.World.WorldService.WorldSaving">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.World.WorldService.#ctor(Orion.Orion)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Orion.World.WorldService"/> class.
+            </summary>
+            <param name="orion">The parent <see cref="T:Orion.Orion"/> instance.</param>
+        </member>
+        <member name="M:Orion.World.WorldService.BreakBlock(System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.World.WorldService.BreakWall(System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.World.WorldService.DropMeteor(System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.World.WorldService.PaintBlock(System.Int32,System.Int32,System.Byte)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.World.WorldService.PaintWall(System.Int32,System.Int32,System.Byte)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.World.WorldService.PlaceBlock(System.Int32,System.Int32,System.UInt16,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.World.WorldService.PlaceWall(System.Int32,System.Int32,System.Byte)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.World.WorldService.Save(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Orion.World.WorldService.SettleLiquids">
+            <inheritdoc/>
+        </member>
+        <member name="T:Orion.World.ITileService">
+            <summary>
+            Provides access to Terraria's Main.tile mechanism, in which implementations may
+            override the data source to and from the Terraria process.
+            </summary>
+        </member>
+        <member name="T:Orion.World.IWorldService">
+            <summary>
+            Provides access to Terraria's world functions.
+            </summary>
+        </member>
+        <member name="E:Orion.World.IWorldService.CheckingChristmas">
+            <summary>
+            Occurs when the game is checking if it is Christmas.
+            </summary>
+        </member>
+        <member name="E:Orion.World.IWorldService.CheckingHalloween">
+            <summary>
+            Occurs when the game is checking if it is Halloween.
+            </summary>
+        </member>
+        <member name="E:Orion.World.IWorldService.HardmodeStarted">
+            <summary>
+            Occurs after hardmode has started.
+            </summary>
+        </member>
+        <member name="E:Orion.World.IWorldService.HardmodeStarting">
+            <summary>
+            Occurs when hardmode is starting.
+            </summary>
+        </member>
+        <member name="E:Orion.World.IWorldService.HardmodeTileUpdating">
+            <summary>
+            Occurs when a tile is updating in hardmode.
+            </summary>
+        </member>
+        <member name="P:Orion.World.IWorldService.Height">
+            <summary>
+            Gets or sets the world's height.
+            </summary>
+        </member>
+        <member name="P:Orion.World.IWorldService.IsBloodMoon">
+            <summary>
+            Gets or sets a value indicating whether it is currently a blood moon.
+            </summary>
+        </member>
+        <member name="P:Orion.World.IWorldService.IsChristmas">
+            <summary>
+            Gets or sets a value indicating whether it is currently Christmas.
+            </summary>
+        </member>
+        <member name="P:Orion.World.IWorldService.IsDaytime">
+            <summary>
+            Gets or sets a value indicating whether it is currently daytime.
+            </summary>
+        </member>
+        <member name="P:Orion.World.IWorldService.IsEclipse">
+            <summary>
+            Gets or sets a value indicating whether it is currently an eclipse.
+            </summary>
+        </member>
+        <member name="P:Orion.World.IWorldService.IsExpertMode">
+            <summary>
+            Gets or sets a value indicating whether the world is in expert mode.
+            </summary>
+        </member>
+        <member name="P:Orion.World.IWorldService.IsFrostMoon">
+            <summary>
+            Gets or sets a value indicating whether it is currently a frost moon.
+            </summary>
+        </member>
+        <member name="P:Orion.World.IWorldService.IsHalloween">
+            <summary>
+            Gets or sets a value indicating whether it is currently Halloween.
+            </summary>
+        </member>
+        <member name="P:Orion.World.IWorldService.IsPumpkinMoon">
+            <summary>
+            Gets or sets a value indicating whether it is currently a pumpkin moon.
+            </summary>
+        </member>
+        <member name="E:Orion.World.IWorldService.MeteorDropping">
+            <summary>
+            Occurs when a meteor is dropping.
+            </summary>
+        </member>
+        <member name="P:Orion.World.IWorldService.Time">
+            <summary>
+            Gets or sets the time. This value is the number of ticks since the beginning of daytime or nighttime.
+            </summary>
+        </member>
+        <member name="P:Orion.World.IWorldService.Width">
+            <summary>
+            Gets or sets the world's width.
+            </summary>
+        </member>
+        <member name="E:Orion.World.IWorldService.WorldLoaded">
+            <summary>
+            Occurs after the world has loaded.
+            </summary>
+        </member>
+        <member name="E:Orion.World.IWorldService.WorldLoading">
+            <summary>
+            Occurs when the world is loading.
+            </summary>
+        </member>
+        <member name="P:Orion.World.IWorldService.WorldName">
+            <summary>
+            Gets or sets the world's name.
+            </summary>
+        </member>
+        <member name="E:Orion.World.IWorldService.WorldSaved">
+            <summary>
+            Occurs after the world has saved.
+            </summary>
+        </member>
+        <member name="E:Orion.World.IWorldService.WorldSaving">
+            <summary>
+            Occurs when the world is saving.
+            </summary>
+        </member>
+        <member name="M:Orion.World.IWorldService.BreakBlock(System.Int32,System.Int32)">
+            <summary>
+            Breaks the block at a position in the world.
+            </summary>
+            <param name="x">The x position.</param>
+            <param name="y">The y position.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            <paramref name="x"/> is negative or greater than or equal to <see cref="P:Orion.World.IWorldService.Width"/>, or <paramref name="y"/>
+            is negative or greater than or equal to <see cref="P:Orion.World.IWorldService.Height"/>.
+            </exception>
+        </member>
+        <member name="M:Orion.World.IWorldService.BreakWall(System.Int32,System.Int32)">
+            <summary>
+            Breaks the wall at a position in the world.
+            </summary>
+            <param name="x">The x position.</param>
+            <param name="y">The y position.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            <paramref name="x"/> is negative or greater than or equal to <see cref="P:Orion.World.IWorldService.Width"/>, or <paramref name="y"/>
+            is negative or greater than or equal to <see cref="P:Orion.World.IWorldService.Height"/>.
+            </exception>
+        </member>
+        <member name="M:Orion.World.IWorldService.DropMeteor(System.Int32,System.Int32)">
+            <summary>
+            Drops a meteor at a position in the world.
+            </summary>
+            <param name="x">The x position.</param>
+            <param name="y">The y position.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            <paramref name="x"/> is less than 50 or greater than or equal to <see cref="P:Orion.World.IWorldService.Width"/> minus 50, or
+            <paramref name="y"/> is less than 50 or greater than or equal to <see cref="P:Orion.World.IWorldService.Height"/> minus 50.
+            </exception>
+        </member>
+        <member name="M:Orion.World.IWorldService.PaintBlock(System.Int32,System.Int32,System.Byte)">
+            <summary>
+            Paints a block at a position in the world.
+            </summary>
+            <param name="x">The x position.</param>
+            <param name="y">The y position.</param>
+            <param name="color">The paint color.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            <paramref name="x"/> is negative or greater than or equal to <see cref="P:Orion.World.IWorldService.Width"/>, or <paramref name="y"/>
+            is negative or greater than or equal to <see cref="P:Orion.World.IWorldService.Height"/>.
+            </exception>
+        </member>
+        <member name="M:Orion.World.IWorldService.PaintWall(System.Int32,System.Int32,System.Byte)">
+            <summary>
+            Paints a wall at a position in the world.
+            </summary>
+            <param name="x">The x position.</param>
+            <param name="y">The y position.</param>
+            <param name="color">The paint color.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            <paramref name="x"/> is negative or greater than or equal to <see cref="P:Orion.World.IWorldService.Width"/>, or <paramref name="y"/>
+            is negative or greater than or equal to <see cref="P:Orion.World.IWorldService.Height"/>.
+            </exception>
+        </member>
+        <member name="M:Orion.World.IWorldService.PlaceBlock(System.Int32,System.Int32,System.UInt16,System.Int32)">
+            <summary>
+            Places a block at a position in the world, optionally with a style.
+            </summary>
+            <param name="x">The x position.</param>
+            <param name="y">The y position.</param>
+            <param name="block">The block type.</param>
+            <param name="style">The style.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            <paramref name="x"/> is negative or greater than or equal to <see cref="P:Orion.World.IWorldService.Width"/>, or <paramref name="y"/>
+            is negative or greater than or equal to <see cref="P:Orion.World.IWorldService.Height"/>.
+            </exception>
+        </member>
+        <member name="M:Orion.World.IWorldService.PlaceWall(System.Int32,System.Int32,System.Byte)">
+            <summary>
+            Places a wall at a position in the world.
+            </summary>
+            <param name="x">The x position.</param>
+            <param name="y">The y position.</param>
+            <param name="wall">The wall type.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            <paramref name="x"/> is negative or greater than or equal to <see cref="P:Orion.World.IWorldService.Width"/>, or <paramref name="y"/>
+            is negative or greater than or equal to <see cref="P:Orion.World.IWorldService.Height"/>.
+            </exception>
+        </member>
+        <member name="M:Orion.World.IWorldService.Save(System.Boolean)">
+            <summary>
+            Saves the world.
+            </summary>
+            <param name="resetTime">A value indicating whether to reset the time.</param>
+        </member>
+        <member name="M:Orion.World.IWorldService.SettleLiquids">
+            <summary>
+            Settles liquids, forcing them to update.
+            </summary>
+        </member>
+    </members>
+</doc>
