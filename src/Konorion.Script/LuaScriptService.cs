@@ -1,90 +1,155 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 using MoonSharp.Interpreter;
 using MoonSharp.VsCodeDebugger;
-using Orion.Entities;
 using Orion.Framework;
-using Orion.Items;
-using Orion.Npcs;
-using Orion.Players;
-using Orion.Projectiles;
-using Orion.World;
 using LuaScript = MoonSharp.Interpreter.Script;
 
 namespace Konorion.Script
 {
-    public sealed class LuaScriptService : SharedService, IScriptService
-    {
-        public object Execute(string code)
-        {
-            var script = new LuaScript(CoreModules.Preset_Default);
+	public sealed class LuaScriptService : SharedService, IScriptService
+	{
+		private static readonly Regex ServiceName = new Regex(@"I(\w+)(Service){1}", RegexOptions.Compiled);
+
+		private void Initialize()
+		{
+			if (_initialized)
+			{
+				return;
+			}
+
+			// register all services
+			foreach (var service in Orion.GetServices<ISharedService>())
+			{
+				UserData.RegisterType(service.GetType());
+
+				// put into global variables
+				foreach (var type in service.GetType().GetInterfaces())
+				{
+					if (type == typeof(ISharedService))
+					{
+						continue;
+					}
+
+					var match = ServiceName.Match(type.Name);
+					if (!match.Success)
+					{
+						continue;
+					}
+
+					var name = match.Groups[1].Value.ToLowerInvariant();
+					DefineVariable(name, service);
+				}
+			}
+
+			// register all plugins
+			foreach (var service in Orion.GetServices<Plugin>())
+			{
+				UserData.RegisterType(service.GetType());
+			}
+
+			// register basic types in XNA
+			foreach (var type in typeof(Microsoft.Xna.Framework.Color).Assembly.GetExportedTypes())
+			{
+				UserData.RegisterType(type);
+			}
+
+			// register public types in orion
+			foreach (var type in typeof(Orion.Orion).Assembly.GetExportedTypes())
+			{
+				UserData.RegisterType(type);
+			}
+
+			_initialized = true;
+		}
+
+		public object DoFile(string path)
+		{
+			Initialize();
+
+			var script = new LuaScript(CoreModules.Preset_Default);
 #if DEBUG
-            var debugServer = new MoonSharpVsCodeDebugServer();
-            debugServer.AttachToScript(script, "random");
+			var debugServer = new MoonSharpVsCodeDebugServer();
+			debugServer.AttachToScript(script, "random");
 #endif
-            SetGlobalVariables(script.Globals);
+			SetGlobalVariables(script.Globals);
 
-            return script.DoString(code);
-        }
+			return ToDotNetType(script.DoFile(path));
+		}
 
-        public void DefineVariable(string identifier, object instance)
-        {
-            if (instance is IService || instance is ISharedService)
-            {
-                _variables[identifier] = instance;
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
-        }
+		public object DoStream(Stream stream)
+		{
+			throw new NotImplementedException();
+		}
 
-        private void SetGlobalVariables(Table globalVariables)
-        {
-            foreach (var kvp in _variables)
-            {
-                UserData.RegisterType(kvp.Value.GetType());
+		public object DoString(string code)
+		{
+			Initialize();
 
-                globalVariables[kvp.Key] = kvp.Value;
-            }
-        }
+			var script = new LuaScript(CoreModules.Preset_Default);
+#if DEBUG
+			var debugServer = new MoonSharpVsCodeDebugServer();
+			debugServer.AttachToScript(script, "random");
+#endif
+			SetGlobalVariables(script.Globals);
 
-        private void MapServices()
-        {
-            var dict = new Dictionary<string, object>
-            {
-                ["player"] = Orion.GetService<IPlayerService>(),
-                ["npc"] = Orion.GetService<INpcService>(),
-                ["projectile"] = Orion.GetService<IProjectileService>(),
-                ["item"] = Orion.GetService<IItemService>(),
-                ["world"] = Orion.GetService<IWorldService>(),
-                // ["configuration"] = Orion.GetService<IConfigurationService<GenericConfiguration>>()
-            };
+			return ToDotNetType(script.DoString(code));
+		}
 
-            foreach (var kvp in dict)
-            {
-                DefineVariable(kvp.Key, kvp.Value);
-            }
-        }
+		public void DefineVariable(string identifier, object instance)
+		{
+			if (_variables.Any(x => x.Key.Equals(identifier, StringComparison.OrdinalIgnoreCase)))
+			{
+				throw new InvalidOperationException();
+			}
 
-        private static void RegisterOrionTypes()
-        {
-            UserData.RegisterType<IOrionEntity>();
-            UserData.RegisterType<IPlayer>();
-            UserData.RegisterType<INpc>();
-            UserData.RegisterType<IProjectile>();
+			_variables.Add(new KeyValuePair<string, object>(identifier, instance));
+		}
 
-            UserData.RegisterType<Vector2>();
-            UserData.RegisterType<Player>();
-        }
+		private void SetGlobalVariables(Table globalVariables)
+		{
+			foreach (var kvp in _variables)
+			{
+				globalVariables[kvp.Key] = kvp.Value;
+			}
+		}
 
-        public LuaScriptService(Orion.Orion orion) : base(orion)
-        {
-            MapServices();
-            RegisterOrionTypes();
-        }
+		public LuaScriptService(Orion.Orion orion) : base(orion)
+		{
+		}
 
-        private readonly IDictionary<string, object> _variables = new Dictionary<string, object>();
-    }
+		private static object ToDotNetType(DynValue value)
+		{
+			switch (value.Type)
+			{
+				case DataType.Nil:
+				case DataType.Void:
+					return null;
+				case DataType.Boolean:
+					return value.Boolean;
+				case DataType.Number:
+					return value.Number;
+				case DataType.String:
+					return value.String;
+				case DataType.Function:
+				case DataType.Table:
+				case DataType.Tuple:
+				case DataType.UserData:
+				case DataType.Thread:
+				case DataType.ClrFunction:
+				case DataType.TailCallRequest:
+				case DataType.YieldRequest:
+					throw new NotSupportedException();
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
+		}
+
+		private bool _initialized;
+
+		private readonly ISet<KeyValuePair<string, object>> _variables = new HashSet<KeyValuePair<string, object>>();
+	}
 }

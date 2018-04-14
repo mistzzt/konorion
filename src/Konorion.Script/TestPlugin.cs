@@ -5,43 +5,39 @@ using TShockAPI;
 
 namespace Konorion.Script
 {
-    [Plugin("Test plugin", Author = "")]
-    public sealed class TestPlugin : Plugin
-    {
-        private const string Folder = "scripts";
+	[Plugin("Test plugin", Author = "")]
+	public sealed class TestPlugin : Plugin
+	{
+		private const string ScriptPath = "scripts";
 
-        public TestPlugin(Orion.Orion orion) : base(orion)
-        {
-            var serv = Orion.GetService<IScriptService>();
+		public TestPlugin(Orion.Orion orion) : base(orion)
+		{
+			Test();
 
-            serv.Execute("print('Script service is runnning...')");
+			Directory.CreateDirectory(ScriptPath);
+		}
 
-            Test();
+		private void Test()
+		{
+			Commands.ChatCommands.Add(new Command(x =>
+			{
+				var serv = Orion.GetService<IScriptService>();
 
-            Directory.CreateDirectory(Folder);
-        }
+				foreach (var file in Directory.EnumerateFiles(ScriptPath, "*.lua"))
+				{
+					try
+					{
+						serv.DoFile(file);
+						x.Player.SendInfoMessage(file);
+					}
+					catch (Exception ex)
+					{
+						Console.WriteLine(ex);
+					}
+				}
 
-        private void Test()
-        {
-            Commands.ChatCommands.Add(new Command(x =>
-            {
-                var serv = Orion.GetService<IScriptService>();
-
-                foreach (var file in Directory.EnumerateFiles(Folder, "*.lua"))
-                {
-                    try
-                    {
-                        serv.Execute(File.ReadAllText(file));
-                        x.Player.SendInfoMessage(file);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex);
-                    }
-                }
-
-                x.Player.SendInfoMessage("ok");
-            }, "test2"));
-        }
-    }
+				x.Player.SendInfoMessage("ok");
+			}, "test2"));
+		}
+	}
 }

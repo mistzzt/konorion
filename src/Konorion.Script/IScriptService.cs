@@ -1,11 +1,16 @@
-﻿using Orion.Framework;
+﻿using System.IO;
+using Orion.Framework;
 
 namespace Konorion.Script
 {
-    public interface IScriptService : ISharedService
-    {
-        object Execute(string code);
+	public interface IScriptService : ISharedService
+	{
+		object DoFile(string path);
 
-        void DefineVariable(string identifier, object instance);
-    }
+		object DoStream(Stream stream);
+
+		object DoString(string code);
+
+		void DefineVariable(string identifier, object instance);
+	}
 }
